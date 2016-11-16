@@ -1,0 +1,62 @@
+package com.example.naborp.focusgame;
+
+import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+
+public class MainMenu extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main_menu);
+
+        Spinner cardChoice = (Spinner)findViewById(R.id.spinner);
+        //cardChoice.setPrompt("Select the number of cards");
+        String[] numOfCards = new String[]{"Select the # of Cards to play with","4","6","8","10","12","14","16","18","20"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,numOfCards);
+        cardChoice.setAdapter(adapter);
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        cardChoice.setAdapter(adapter);
+        cardChoice.setOnItemSelectedListener(this);
+
+    }
+
+    public void onItemSelected(AdapterView<?> parent, View v, int position, long id) {
+
+        int userChoice = 0;
+
+        switch (position) {
+            case 0 :
+                break;
+            case 1 :
+                //TODO: Display MainGame Activity with 4 Cards
+                userChoice = 2;
+                break;
+            case 2 :
+                //TODO: Display MainGame Activity with 6 Cards
+                userChoice = 3;
+                break;
+            case 3 :
+                //TODO: Display MainGame Activity with 8 Cards
+                userChoice = 4;
+                break;
+        }
+
+        //ImagePlacing ip = new ImagePlacing(this, userChoice);
+//        ip.randomizeCards();
+        //MainGame game = new MainGame(userChoice);
+        //game.startActivity(new Intent(this, MainGame.class));
+        Intent intent = new Intent(this,MainGame.class);
+        startActivity(intent);
+    }
+
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
+    }
+}

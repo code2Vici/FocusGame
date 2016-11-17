@@ -1,5 +1,5 @@
 package com.example.naborp.focusgame;
-/*Main Game class where the cards are diplayed hi*/
+/*Main Game class where the cards are diplayed hi mi name is ubaldo*/
 
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;

@@ -29,14 +29,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/endGame"
-        android:layout_x="250dp"
+        android:layout_x="230dp"
         android:layout_y="430dp" />
         <!--
         android:layout_alignBottom="@+id/newGame"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginBottom="25dp"
-        -->
+        android:layout_marginBottom="25dp"-->
+
 
     <Button
         android:text="Try Again"
@@ -47,7 +47,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_x="135dp"
+        android:layout_x="115dp"
         android:layout_y="430dp" />
 
     <Button
@@ -59,7 +59,8 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_x="20dp"
+        android:onClick="newGameClicked"
+        android:layout_x="0dp"
         android:layout_y="430dp" />
 
 </AbsoluteLayout>

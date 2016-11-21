@@ -42,7 +42,7 @@ public class MainMenu extends AppCompatActivity implements AdapterView.OnItemSel
             case 0 :
                 break;
             case 1 :
-                //TODO: Display MainGame Activity with 4 Cards
+                //Display MainGame Activity with 4 Cards
                 userChoice = 2;
                 startGame = new MainGame();
                 intent = new Intent(this, startGame.getClass());
@@ -52,7 +52,7 @@ public class MainMenu extends AppCompatActivity implements AdapterView.OnItemSel
                 startActivity(intent);
                 break;
             case 2 :
-                //TODO: Display MainGame Activity with 6 Cards
+                //Display MainGame Activity with 6 Cards
                 userChoice = 3;
                 startGame = new MainGame();
                 intent = new Intent(this, startGame.getClass());
@@ -62,7 +62,7 @@ public class MainMenu extends AppCompatActivity implements AdapterView.OnItemSel
                 startActivity(intent);
                 break;
             case 3 :
-                //TODO: Display MainGame Activity with 8 Cards
+                //Display MainGame Activity with 8 Cards
                 userChoice = 4;
                 startGame = new MainGame();
                 intent = new Intent(this, startGame.getClass());
@@ -72,7 +72,7 @@ public class MainMenu extends AppCompatActivity implements AdapterView.OnItemSel
                 startActivity(intent);
                 break;
             case 4 :
-                //TODO: Display MainGame Activity with 10 Cards
+                //Display MainGame Activity with 10 Cards
                 userChoice = 5;
                 startGame = new MainGame();
                 intent = new Intent(this, startGame.getClass());
@@ -82,7 +82,7 @@ public class MainMenu extends AppCompatActivity implements AdapterView.OnItemSel
                 startActivity(intent);
                 break;
             case 5 :
-                //TODO: Display MainGame Activity with 12 Cards
+                //Display MainGame Activity with 12 Cards
                 userChoice = 6;
                 startGame = new MainGame();
                 intent = new Intent(this, startGame.getClass());
@@ -92,7 +92,7 @@ public class MainMenu extends AppCompatActivity implements AdapterView.OnItemSel
                 startActivity(intent);
                 break;
             case 6 :
-                //TODO: Display MainGame Activity with 14 Cards
+                //Display MainGame Activity with 14 Cards
                 userChoice = 7;
                 startGame = new MainGame();
                 intent = new Intent(this, startGame.getClass());
@@ -102,7 +102,7 @@ public class MainMenu extends AppCompatActivity implements AdapterView.OnItemSel
                 startActivity(intent);
                 break;
             case 7 :
-                //TODO: Display MainGame Activity with 16 Cards
+                //Display MainGame Activity with 16 Cards
                 userChoice = 8;
                 startGame = new MainGame();
                 intent = new Intent(this, startGame.getClass());
@@ -112,7 +112,7 @@ public class MainMenu extends AppCompatActivity implements AdapterView.OnItemSel
                 startActivity(intent);
                 break;
             case 8 :
-                //TODO: Display MainGame Activity with 18 Cards
+                //Display MainGame Activity with 18 Cards
                 userChoice = 9;
                 startGame = new MainGame();
                 intent = new Intent(this, startGame.getClass());
@@ -122,7 +122,7 @@ public class MainMenu extends AppCompatActivity implements AdapterView.OnItemSel
                 startActivity(intent);
                 break;
             case 9 :
-                //TODO: Display MainGame Activity with 20 Cards
+                //Display MainGame Activity with 20 Cards
                 userChoice = 10;
                 startGame = new MainGame();
                 intent = new Intent(this, startGame.getClass());

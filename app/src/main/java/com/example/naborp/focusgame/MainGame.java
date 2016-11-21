@@ -1,6 +1,7 @@
 package com.example.naborp.focusgame;
 /*Main Game class where the cards are diplayed */
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -36,5 +37,9 @@ public class MainGame extends AppCompatActivity
                 Toast.makeText(MainGame.this, "" + position,Toast.LENGTH_SHORT);
             }
         });
+    }
+    public void newGameClicked(View v) {
+        Intent intent = new Intent(getApplicationContext(),MainMenu.class);
+        startActivity(intent);
     }
 }

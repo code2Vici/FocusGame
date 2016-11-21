@@ -41,6 +41,7 @@ public class ImagePlacing extends BaseAdapter {
             Integer tmp = cardsIds.remove(0);
             tempUserCardsIds.add(tmp);
             tempUserCardsIds.add(tmp);
+            Collections.shuffle(tempUserCardsIds);
         }
 
         Collections.shuffle(tempUserCardsIds);
@@ -83,7 +84,7 @@ public class ImagePlacing extends BaseAdapter {
 
         if (convertView == null) {
             imageView = new ImageView(mContext);
-            imageView.setLayoutParams(new GridView.LayoutParams(120,120));
+            imageView.setLayoutParams(new GridView.LayoutParams(200,200));
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         }
         else {

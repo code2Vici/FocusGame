@@ -11,7 +11,8 @@ import android.widget.Spinner;
 public class MainMenu extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
 
@@ -27,33 +28,48 @@ public class MainMenu extends AppCompatActivity implements AdapterView.OnItemSel
 
     }
 
-    public void onItemSelected(AdapterView<?> parent, View v, int position, long id) {
-
+    public void onItemSelected(AdapterView<?> parent, View v, int position, long id)
+    {
+        MainGame startGame;
+        Intent intent;
+        Bundle b;
         int userChoice = 0;
 
-        switch (position) {
+        switch (position)
+        {
             case 0 :
                 break;
             case 1 :
                 //TODO: Display MainGame Activity with 4 Cards
                 userChoice = 2;
+                startGame = new MainGame();
+                intent = new Intent(this, startGame.getClass());
+                b = new Bundle();
+                b.putInt("userChoice", userChoice);
+                intent.putExtras(b);
+                startActivity(intent);
                 break;
             case 2 :
                 //TODO: Display MainGame Activity with 6 Cards
                 userChoice = 3;
+                startGame = new MainGame();
+                intent = new Intent(this, startGame.getClass());
+                b = new Bundle();
+                b.putInt("userChoice", userChoice);
+                intent.putExtras(b);
+                startActivity(intent);
                 break;
             case 3 :
                 //TODO: Display MainGame Activity with 8 Cards
                 userChoice = 4;
+                startGame = new MainGame();
+                intent = new Intent(this, startGame.getClass());
+                b = new Bundle();
+                b.putInt("userChoice", userChoice);
+                intent.putExtras(b);
+                startActivity(intent);
                 break;
         }
-
-        //ImagePlacing ip = new ImagePlacing(this, userChoice);
-//        ip.randomizeCards();
-        //MainGame game = new MainGame(userChoice);
-        //game.startActivity(new Intent(this, MainGame.class));
-        Intent intent = new Intent(this,MainGame.class);
-        startActivity(intent);
     }
 
     public void onNothingSelected(AdapterView<?> adapterView) {

@@ -24,20 +24,11 @@ public class ImagePlacing extends BaseAdapter {
 
     private ArrayList<Integer> cardsIds = new ArrayList<>(Arrays.asList(
 
-            R.drawable.sample_0, R.drawable.sample_1,
-            R.drawable.sample_2, R.drawable.sample_3,
-            R.drawable.sample_4, R.drawable.sample_5,
-            R.drawable.sample_6, R.drawable.sample_7,
-
-            R.drawable.sample_0, R.drawable.sample_1))
-
-            /*
-            R.drawable.sample_2, R.drawable.sample_3,
-            R.drawable.sample_4, R.drawable.sample_5,
-            R.drawable.sample_6, R.drawable.sample_7,
-            R.drawable.sample_0, R.drawable.sample_1,
-            R.drawable.sample_2, R.drawable.sample_3))
-            */
+            R.drawable.animal_0, R.drawable.animal_1,
+            R.drawable.animal_2, R.drawable.animal_3,
+            R.drawable.animal_4, R.drawable.animal_5,
+            R.drawable.animal_6, R.drawable.animal_7,
+            R.drawable.animal_8, R.drawable.animal_9))
     ;
 
     public ImagePlacing(Context c, int userChoice){

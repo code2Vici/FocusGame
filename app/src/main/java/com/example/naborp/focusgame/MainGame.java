@@ -1,19 +1,27 @@
 package com.example.naborp.focusgame;
 /*Main Game class where the cards are diplayed */
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.ButtonBarLayout;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.GridView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 public class MainGame extends AppCompatActivity
 {
     private int userChoice;
     private GridView cardTable;
+    private MediaPlayer appSong;
+    private ToggleButton play_stop_Button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -38,6 +46,25 @@ public class MainGame extends AppCompatActivity
                 Toast.makeText(MainGame.this, "" + position,Toast.LENGTH_SHORT);
             }
         });
+
+        play_stop_Button = (ToggleButton) findViewById(R.id.play_stop_Button);
+        play_stop_Button.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
+
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked) {
+                    appSong = MediaPlayer.create(getApplicationContext(),R.raw.jeopardy_song);
+                    appSong.start();
+                    appSong.setVolume(100,100);
+                    appSong.setLooping(true);
+                }
+                else {
+                    if(appSong != null) {
+                        appSong.release();
+                        appSong = null;
+                    }
+                }
+            }
+        });
     }
 
    /* public void onSaveInstanceState(Bundle savedInstanceState)
@@ -50,5 +77,14 @@ public class MainGame extends AppCompatActivity
 
         Intent intent = new Intent(getApplicationContext(),MainMenu.class);
         startActivity(intent);
+
+        if (appSong != null) {
+            try {
+                appSong.stop();
+                appSong.release();
+            } finally {
+                appSong = null;
+            }
+        }
     }
 }

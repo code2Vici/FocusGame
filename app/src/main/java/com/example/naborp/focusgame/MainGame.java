@@ -38,7 +38,6 @@ public class MainGame extends AppCompatActivity
 
         //Problem call
         cardTable.setAdapter(new ImagePlacing(this, userChoice));
-
         cardTable.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             @Override
@@ -66,6 +65,7 @@ public class MainGame extends AppCompatActivity
                 }
             }
         });
+
     }
 
     public void onSaveInstanceState(Bundle savedInstanceState)
@@ -82,6 +82,15 @@ public class MainGame extends AppCompatActivity
         }
 
         savedInstanceState.putIntArray("save", temp);
+
+        if (appSong != null) {
+            try {
+                appSong.stop();
+                appSong.release();
+            } finally {
+                appSong = null;
+            }
+        }
     }
     @Override
     public void onRestoreInstanceState(Bundle savedInstanceState)

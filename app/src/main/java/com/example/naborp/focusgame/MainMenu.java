@@ -17,6 +17,7 @@ public class MainMenu extends AppCompatActivity implements AdapterView.OnItemSel
 
     private MediaPlayer appSong;
     private ToggleButton play_stop_Button;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {

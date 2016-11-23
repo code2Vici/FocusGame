@@ -32,20 +32,20 @@
 
         <Button
             android:layout_height="wrap_content"
-            android:id="@+id/newGame_button"
+            android:id="@+id/newGame"
             android:text="New Game"
             android:layout_width="wrap_content"
-            android:onClick="newGameClicked" />
+            android:onClick="newGameClicked"/>
 
         <Button
             android:layout_height="wrap_content"
-            android:id="@+id/tryAgain_button"
+            android:id="@+id/tryAgain"
             android:text="Try Again"
             android:layout_width="wrap_content" />
 
         <Button
             android:layout_height="wrap_content"
-            android:id="@+id/newGame"
+            android:id="@+id/endGame"
             android:text="End Game"
             android:layout_width="wrap_content" />
 

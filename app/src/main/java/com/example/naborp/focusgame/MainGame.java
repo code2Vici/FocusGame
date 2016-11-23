@@ -3,6 +3,7 @@ package com.example.naborp.focusgame;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
@@ -37,13 +38,12 @@ public class MainGame extends AppCompatActivity
 
         //Problem call
         cardTable.setAdapter(new ImagePlacing(this, userChoice));
-
         cardTable.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
-                Toast.makeText(MainGame.this, "" + position,Toast.LENGTH_SHORT);
+                Toast.makeText(MainGame.this, "" + position,Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -65,14 +65,49 @@ public class MainGame extends AppCompatActivity
                 }
             }
         });
+
     }
 
-   /* public void onSaveInstanceState(Bundle savedInstanceState)
+    public void onSaveInstanceState(Bundle savedInstanceState)
     {
         super.onSaveInstanceState(savedInstanceState);
-        //savedInstanceState.putParcelable("myAdapter", cardTable.);
-        //state.putParcelableArrayList("myAdapter", myAdapter.getItems());
-    }*/
+
+        int totalsavedCards = userChoice * 2;
+
+        int[] temp = new int[totalsavedCards ];
+
+        for(int i = 0; i < totalsavedCards ; i++)
+        {
+            temp[i] = (int)cardTable.getAdapter().getItem(i);
+        }
+
+        savedInstanceState.putIntArray("save", temp);
+
+        if (appSong != null) {
+            try {
+                appSong.stop();
+                appSong.release();
+            } finally {
+                appSong = null;
+            }
+        }
+    }
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState)
+    {
+        super.onRestoreInstanceState(savedInstanceState);
+        int[] temp = savedInstanceState.getIntArray("save");
+
+        Integer[] storing = new Integer[temp.length];
+        int i = 0;
+
+        for(int address: temp)
+        {
+          storing[i++] = Integer.valueOf(address);
+        }
+
+        cardTable.setAdapter(new ImagePlacing(this, storing));
+    }
     public void newGameClicked(View v) {
 
         Intent intent = new Intent(getApplicationContext(),MainMenu.class);

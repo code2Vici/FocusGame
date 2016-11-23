@@ -2,6 +2,8 @@ package com.example.naborp.focusgame;
 
 import android.animation.ObjectAnimator;
 import android.content.Context;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -28,15 +30,18 @@ public class ImagePlacing extends BaseAdapter {
             R.drawable.animal_2, R.drawable.animal_3,
             R.drawable.animal_4, R.drawable.animal_5,
             R.drawable.animal_6, R.drawable.animal_7,
-            R.drawable.animal_8, R.drawable.animal_9))
-    ;
+            R.drawable.animal_8, R.drawable.animal_9));
 
-    public ImagePlacing(Context c, int userChoice){
+    public ImagePlacing(Context c, Integer[] arr)
+    {
+        mContext = c;
+        userCardsIds =  arr;
+    }
+    public ImagePlacing(Context c, int userChoice) {
         mContext = c;
         this.userChoice = userChoice;
         userCardsIds = new Integer[userChoice];
-        for(int i = 0; i < userChoice; i++)
-        {
+        for (int i = 0; i < userChoice; i++) {
             Collections.shuffle(cardsIds);
             Integer tmp = cardsIds.remove(0);
             tempUserCardsIds.add(tmp);
@@ -66,18 +71,45 @@ public class ImagePlacing extends BaseAdapter {
 
     }  */
 
+   /* public ImagePlacing(Parcel source)
+    {
+         for(int i = 0; i < userCardsIds.length; < i++)
+    }
+
+    public void writeToParcel(Parcel out, int flags)
+        {
+        out.writeArray(userCardsIds);
+    }
+
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Parcelable.Creator<ImagePlacing> CREATOR = new Parcelable.Creator<ImagePlacing>()
+    {
+        public ImagePlacing createFromParcel(Parcel in)
+        {
+            return new ImagePlacing(in);
+        }
+        public ImagePlacing [] newArray(int size)
+        {
+            return new ImagePlacing[size];
+        }
+
+    }; */
+
     public int getCount() {
         return userCardsIds.length;
     }
 
     public Object getItem(int position) {
-        return null;
+        return userCardsIds[position];
     }
 
     public long getItemId(int position) {
         return 0;
     }
-
+    
     public View getView(int position, View convertView, ViewGroup parent)
     {
         ImageView imageView;

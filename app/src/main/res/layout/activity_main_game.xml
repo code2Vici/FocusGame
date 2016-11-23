@@ -34,7 +34,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/newGame_button"
             android:text="New Game"
-            android:layout_width="wrap_content" />
+            android:layout_width="wrap_content"
+            android:onClick="newGameClicked" />
 
         <Button
             android:layout_height="wrap_content"
@@ -46,8 +47,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/newGame"
             android:text="End Game"
-            android:layout_width="wrap_content"
-            android:onClick="newGameClicked" />
+            android:layout_width="wrap_content" />
 
     </LinearLayout>
 

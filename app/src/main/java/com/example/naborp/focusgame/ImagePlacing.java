@@ -2,6 +2,8 @@ package com.example.naborp.focusgame;
 
 import android.animation.ObjectAnimator;
 import android.content.Context;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -15,7 +17,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Random;
 
-public class ImagePlacing extends BaseAdapter {
+public class ImagePlacing extends BaseAdapter implements Parcelable {
 
     private Context mContext;
     private int userChoice;
@@ -28,15 +30,13 @@ public class ImagePlacing extends BaseAdapter {
             R.drawable.animal_2, R.drawable.animal_3,
             R.drawable.animal_4, R.drawable.animal_5,
             R.drawable.animal_6, R.drawable.animal_7,
-            R.drawable.animal_8, R.drawable.animal_9))
-    ;
+            R.drawable.animal_8, R.drawable.animal_9));
 
-    public ImagePlacing(Context c, int userChoice){
+    public ImagePlacing(Parcel in, Context c, int userChoice) {
         mContext = c;
         this.userChoice = userChoice;
         userCardsIds = new Integer[userChoice];
-        for(int i = 0; i < userChoice; i++)
-        {
+        for (int i = 0; i < userChoice; i++) {
             Collections.shuffle(cardsIds);
             Integer tmp = cardsIds.remove(0);
             tempUserCardsIds.add(tmp);
@@ -65,6 +65,33 @@ public class ImagePlacing extends BaseAdapter {
         //tempUserCardsIds.toArray(new Integer[0]);
 
     }  */
+
+    public ImagePlacing(Parcel source)
+    {
+        myCast = source.readIntArray((int[])userCardsIds);
+    }
+
+    public void writeToParcel(Parcel out, int flags)
+        {
+        out.writeArray(userCardsIds);
+    }
+
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Parcelable.Creator<ImagePlacing> CREATOR = new Parcelable.Creator<ImagePlacing>()
+    {
+        public ImagePlacing createFromParcel(Parcel in)
+        {
+            return new ImagePlacing(in);
+        }
+        public ImagePlacing [] newArray(int size)
+        {
+            return new ImagePlacing[size];
+        }
+
+    };
 
     public int getCount() {
         return userCardsIds.length;

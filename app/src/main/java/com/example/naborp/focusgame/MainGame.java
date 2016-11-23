@@ -2,6 +2,7 @@ package com.example.naborp.focusgame;
 /*Main Game class where the cards are diplayed */
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -40,12 +41,20 @@ public class MainGame extends AppCompatActivity
         });
     }
 
-   /* public void onSaveInstanceState(Bundle savedInstanceState)
+  /* public void onSaveInstanceState(Bundle savedInstanceState)
     {
         super.onSaveInstanceState(savedInstanceState);
+       // b.putParcelableArray("key", );
+
         //savedInstanceState.putParcelable("myAdapter", cardTable.);
         //state.putParcelableArrayList("myAdapter", myAdapter.getItems());
     }*/
+   /* public void onConfigurationChanged(Configuration newConfig)
+    {
+        super.onConfigurationChanged(newConfig);
+        setContentView(R.layout.activity_main_game);
+    }*/
+
     public void newGameClicked(View v) {
 
         Intent intent = new Intent(getApplicationContext(),MainMenu.class);

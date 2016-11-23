@@ -28,7 +28,8 @@
         android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:id="@+id/linearLayout">
 
         <Button
             android:layout_height="wrap_content"
@@ -49,7 +50,15 @@
             android:text="End Game"
             android:layout_width="wrap_content" />
 
+        <ToggleButton
+            android:text="Music ON/OFF"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_x="266dp"
+            android:layout_y="428dp"
+            android:id="@+id/play_stop_Button"
+            android:layout_above="@+id/linearLayout"
+            android:layout_centerHorizontal="true" />
     </LinearLayout>
-
 
 </RelativeLayout>

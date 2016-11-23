@@ -13,6 +13,7 @@ import android.widget.Toast;
 public class MainGame extends AppCompatActivity
 {
     private int userChoice;
+    private GridView cardTable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -24,7 +25,7 @@ public class MainGame extends AppCompatActivity
         this.userChoice = b.getInt("userChoice");
         System.out.println("userChoice" + userChoice);
 
-        GridView cardTable = (GridView) findViewById(R.id.cardTable);
+        cardTable = (GridView) findViewById(R.id.cardTable);
 
         //Problem call
         cardTable.setAdapter(new ImagePlacing(this, userChoice));
@@ -38,7 +39,15 @@ public class MainGame extends AppCompatActivity
             }
         });
     }
+
+   /* public void onSaveInstanceState(Bundle savedInstanceState)
+    {
+        super.onSaveInstanceState(savedInstanceState);
+        //savedInstanceState.putParcelable("myAdapter", cardTable.);
+        //state.putParcelableArrayList("myAdapter", myAdapter.getItems());
+    }*/
     public void newGameClicked(View v) {
+
         Intent intent = new Intent(getApplicationContext(),MainMenu.class);
         startActivity(intent);
     }

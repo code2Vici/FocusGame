@@ -41,20 +41,37 @@ public class MainGame extends AppCompatActivity
         });
     }
 
-  /* public void onSaveInstanceState(Bundle savedInstanceState)
+    public void onSaveInstanceState(Bundle savedInstanceState)
     {
         super.onSaveInstanceState(savedInstanceState);
-       // b.putParcelableArray("key", );
 
-        //savedInstanceState.putParcelable("myAdapter", cardTable.);
-        //state.putParcelableArrayList("myAdapter", myAdapter.getItems());
-    }*/
-   /* public void onConfigurationChanged(Configuration newConfig)
+        int totalsavedCards = userChoice * 2;
+
+        int[] temp = new int[totalsavedCards ];
+
+        for(int i = 0; i < totalsavedCards ; i++)
+        {
+            temp[i] = (int)cardTable.getAdapter().getItem(i);
+        }
+
+        savedInstanceState.putIntArray("save", temp);
+    }
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState)
     {
-        super.onConfigurationChanged(newConfig);
-        setContentView(R.layout.activity_main_game);
-    }*/
+        super.onRestoreInstanceState(savedInstanceState);
+        int[] temp = savedInstanceState.getIntArray("save");
 
+        Integer[] storing = new Integer[temp.length];
+        int i = 0;
+
+        for(int address: temp)
+        {
+          storing[i++] = Integer.valueOf(address);
+        }
+
+        cardTable.setAdapter(new ImagePlacing(this, storing));
+    }
     public void newGameClicked(View v) {
 
         Intent intent = new Intent(getApplicationContext(),MainMenu.class);

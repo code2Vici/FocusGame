@@ -17,7 +17,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Random;
 
-public class ImagePlacing extends BaseAdapter implements Parcelable {
+public class ImagePlacing extends BaseAdapter {
 
     private Context mContext;
     private int userChoice;
@@ -32,7 +32,12 @@ public class ImagePlacing extends BaseAdapter implements Parcelable {
             R.drawable.animal_6, R.drawable.animal_7,
             R.drawable.animal_8, R.drawable.animal_9));
 
-    public ImagePlacing(Parcel in, Context c, int userChoice) {
+    public ImagePlacing(Context c, Integer[] arr)
+    {
+        mContext = c;
+        userCardsIds =  arr;
+    }
+    public ImagePlacing(Context c, int userChoice) {
         mContext = c;
         this.userChoice = userChoice;
         userCardsIds = new Integer[userChoice];
@@ -66,9 +71,9 @@ public class ImagePlacing extends BaseAdapter implements Parcelable {
 
     }  */
 
-    public ImagePlacing(Parcel source)
+   /* public ImagePlacing(Parcel source)
     {
-        myCast = source.readIntArray((int[])userCardsIds);
+         for(int i = 0; i < userCardsIds.length; < i++)
     }
 
     public void writeToParcel(Parcel out, int flags)
@@ -91,14 +96,14 @@ public class ImagePlacing extends BaseAdapter implements Parcelable {
             return new ImagePlacing[size];
         }
 
-    };
+    }; */
 
     public int getCount() {
         return userCardsIds.length;
     }
 
     public Object getItem(int position) {
-        return null;
+        return userCardsIds[position];
     }
 
     public long getItemId(int position) {

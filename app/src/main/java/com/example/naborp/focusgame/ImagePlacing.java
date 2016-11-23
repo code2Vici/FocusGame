@@ -109,7 +109,7 @@ public class ImagePlacing extends BaseAdapter {
     public long getItemId(int position) {
         return 0;
     }
-
+    
     public View getView(int position, View convertView, ViewGroup parent)
     {
         ImageView imageView;

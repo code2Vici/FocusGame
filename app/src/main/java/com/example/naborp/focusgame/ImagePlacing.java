@@ -84,7 +84,7 @@ public class ImagePlacing extends BaseAdapter {
 
         if (convertView == null) {
             imageView = new ImageView(mContext);
-            imageView.setLayoutParams(new GridView.LayoutParams(100,100));
+            imageView.setLayoutParams(new GridView.LayoutParams(180,180));
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         }
         else {

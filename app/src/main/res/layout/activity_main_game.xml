@@ -12,24 +12,23 @@
     tools:context="com.example.naborp.focusgame.MainGame">
 
 
-    <GridView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/cardTable"
-        android:layout_width="fill_parent"
-        android:layout_height="250dp"
-        android:background="#FFFFFF"
-        android:numColumns="5"
-        android:columnWidth="40dp"
-        android:verticalSpacing="0dp"
-        android:horizontalSpacing="0dp"
-        android:stretchMode="columnWidth"
-        android:layout_above="@+id/tryAgain" />
-
     <!--
         android:layout_alignBottom="@+id/newGame"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_marginBottom="25dp"-->
 
+
+    <Button
+        android:text="Try Again"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tryAgain"
+        android:layout_x="115dp"
+        android:layout_y="430dp"
+        android:layout_alignBaseline="@+id/endGame"
+        android:layout_alignBottom="@+id/endGame"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:text="End Game"
@@ -40,20 +39,9 @@
         android:layout_y="430dp"
         android:layout_marginLeft="14dp"
         android:layout_marginStart="14dp"
-        android:layout_alignTop="@+id/newGame"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="15dp" />
-
-    <Button
-        android:text="Try Again"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tryAgain"
-        android:layout_x="230dp"
-        android:layout_y="430dp"
-        android:layout_alignTop="@+id/endGame"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentStart="true" />
 
     <Button
         android:text="New Game"
@@ -61,12 +49,27 @@
         android:layout_height="wrap_content"
         android:id="@+id/newGame"
         android:onClick="newGameClicked"
-        android:layout_x="230dp"
+        android:layout_x="0dp"
         android:layout_y="430dp"
-        android:layout_marginRight="55dp"
-        android:layout_marginEnd="55dp"
+        android:layout_marginRight="14dp"
+        android:layout_marginEnd="14dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
+
+    <GridView
+        android:id="@+id/cardTable"
+        android:layout_width="match_parent"
+        android:layout_height="377dp"
+        android:background="#FFFFFF"
+        android:numColumns="5"
+        android:columnWidth="50dp"
+        android:verticalSpacing="1dp"
+        android:horizontalSpacing="1dp"
+        android:layout_x="1dp"
+        android:layout_y="25dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main_menu"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#51b46d"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.naborp.focusgame.MainMenu">
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:spinnerMode="dropdown"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/spinner" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="165dp"
+        app:srcCompat="@drawable/game_logo"
+        android:id="@+id/gameLogo"
+        android:layout_below="@+id/spinner"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="35dp"
+        android:layout_x="13dp"
+        android:layout_y="51dp" />
+
+    <TextView
+        android:text="By: Nabor Palomera\nUbaldo Jimenez\nWeiying Lee\nShun Lu"
+        android:textSize="20dp"
+        android:textAlignment="center"
+        android:layout_width="230dp"
+        android:layout_height="115dp"
+        android:layout_marginTop="39dp"
+        android:id="@+id/authors"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:layout_below="@+id/gameLogo"
+        android:layout_centerHorizontal="true"
+        android:layout_x="308dp"
+        android:layout_y="77dp" />
+
+</AbsoluteLayout>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main_game"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="#51b46d"
+    tools:context="com.example.naborp.focusgame.MainGame">
+
+    <GridView
+        android:id="@+id/cardTable"
+        android:layout_width="600dp"
+        android:layout_height="230dp"
+        android:background="#51b46d"
+        android:numColumns="auto_fit"
+        android:columnWidth="50dp"
+        android:verticalSpacing="5dp"
+        android:horizontalSpacing="5dp"
+        android:layout_x="1dp"
+        android:layout_y="25dp" />
+
+    <LinearLayout
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_height="wrap_content"
+            android:id="@+id/newGame"
+            android:text="New Game"
+            android:layout_width="wrap_content"
+            android:onClick="newGameClicked"/>
+
+        <Button
+            android:layout_height="wrap_content"
+            android:id="@+id/tryAgain"
+            android:text="Try Again"
+            android:layout_width="wrap_content" />
+
+        <Button
+            android:layout_height="wrap_content"
+            android:id="@+id/endGame"
+            android:text="End Game"
+            android:layout_width="wrap_content" />
+
+        <ToggleButton
+            android:text="Music ON/OFF"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_x="266dp"
+            android:layout_y="428dp"
+            android:id="@+id/play_stop_Button"
+            android:layout_above="@+id/linearLayout"
+            android:layout_centerHorizontal="true" />
+
+    </LinearLayout>
+
+
+</RelativeLayout>

@@ -14,10 +14,10 @@
     <GridView
         android:id="@+id/cardTable"
         android:layout_width="match_parent"
-        android:layout_height="377dp"
-        android:background="#FFFFFF"
+        android:layout_height="500dp"
+        android:background="#51b46d"
         android:numColumns="4"
-        android:columnWidth="90dp"
+        android:columnWidth="50dp"
         android:verticalSpacing="10dp"
         android:horizontalSpacing="10dp"
         android:layout_x="1dp"

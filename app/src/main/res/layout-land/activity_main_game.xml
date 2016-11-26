@@ -13,11 +13,11 @@
 
     <GridView
         android:id="@+id/cardTable"
-        android:layout_width="600dp"
-        android:layout_height="230dp"
+        android:layout_width="700dp"
+        android:layout_height="250dp"
         android:background="#51b46d"
         android:numColumns="auto_fit"
-        android:columnWidth="50dp"
+        android:columnWidth="80dp"
         android:verticalSpacing="5dp"
         android:horizontalSpacing="5dp"
         android:layout_x="1dp"

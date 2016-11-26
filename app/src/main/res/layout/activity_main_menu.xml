@@ -14,34 +14,35 @@
 
     <Spinner
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="62dp"
         android:spinnerMode="dropdown"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:id="@+id/spinner" />
 
     <TextView
-        android:text="By: Nabor Palomera\nUbaldo Jimenez\nWeiying Lee\nShun Lu"
+        android:text="\nBy: Nabor Palomera\nUbaldo Jimenez\nWeiying Lee\nShun Lu"
+        android:textSize="25dp"
         android:textAlignment="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="275dp"
+        android:layout_height="154dp"
         android:layout_marginTop="39dp"
         android:id="@+id/authors"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:layout_below="@+id/gameLogo"
         android:layout_centerHorizontal="true"
-        android:layout_x="93dp"
-        android:layout_y="388dp" />
+        android:layout_x="60dp"
+        android:layout_y="396dp" />
 
     <ImageView
-        android:layout_width="363dp"
+        android:layout_width="366dp"
         android:layout_height="253dp"
         app:srcCompat="@drawable/game_logo"
         android:id="@+id/gameLogo"
         android:layout_below="@+id/spinner"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="35dp"
-        android:layout_x="-10dp"
-        android:layout_y="123dp" />
+        android:layout_x="8dp"
+        android:layout_y="121dp" />
 
 </AbsoluteLayout>

@@ -22,6 +22,9 @@ public class ImagePlacing extends BaseAdapter {
     private Context mContext;
     private int userChoice;
     private Integer[] userCardsIds;
+    //This field stores state of is the card selected?.  If it is not selected, show background card
+    //If selected, show correct card in userCardsIds
+    private boolean[] selectedCards;
     private ArrayList<Integer> tempUserCardsIds = new ArrayList<>();
 
     private ArrayList<Integer> cardsIds = new ArrayList<>(Arrays.asList(
@@ -40,6 +43,7 @@ public class ImagePlacing extends BaseAdapter {
     public ImagePlacing(Context c, int userChoice) {
         mContext = c;
         this.userChoice = userChoice;
+        selectedCards = new boolean[userChoice * 2];
         userCardsIds = new Integer[userChoice];
         for (int i = 0; i < userChoice; i++) {
             Collections.shuffle(cardsIds);
@@ -109,7 +113,18 @@ public class ImagePlacing extends BaseAdapter {
     public long getItemId(int position) {
         return 0;
     }
-    
+
+    public boolean[] getSelectedCards() { return selectedCards; }
+
+    public void setUserCardsIds(Integer[] userCardsIds)
+    {
+        this.userCardsIds = userCardsIds;
+    }
+
+    public void setSelectedCardsTrue(int position) { this.selectedCards[position] = true; }
+
+    public void setSelectedCards (boolean[] selectedCards) { this.selectedCards = selectedCards; }
+
     public View getView(int position, View convertView, ViewGroup parent)
     {
         ImageView imageView;
@@ -122,7 +137,14 @@ public class ImagePlacing extends BaseAdapter {
         else {
             imageView = (ImageView) convertView;
         }
-        imageView.setImageResource(userCardsIds[position]);
+        //Display background card if false
+        if (!selectedCards[position])
+        {
+            imageView.setImageResource(R.drawable.animal_10);
+        }
+        else {
+            imageView.setImageResource(userCardsIds[position]);
+        }
         return imageView;
     }
 }

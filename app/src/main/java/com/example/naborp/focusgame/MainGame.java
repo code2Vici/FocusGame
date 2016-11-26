@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
@@ -23,6 +24,8 @@ public class MainGame extends AppCompatActivity
     private GridView cardTable;
     private MediaPlayer appSong;
     private ToggleButton play_stop_Button;
+    //This field stores the instance of ImagePlacing object
+    private ImagePlacing imagePlacing;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -37,13 +40,18 @@ public class MainGame extends AppCompatActivity
         cardTable = (GridView) findViewById(R.id.cardTable);
 
         //Problem call
-        cardTable.setAdapter(new ImagePlacing(this, userChoice));
+
+        cardTable.setAdapter(imagePlacing = new ImagePlacing(this, userChoice));
         cardTable.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
                 Toast.makeText(MainGame.this, "" + position,Toast.LENGTH_SHORT).show();
+                ImageView img = (ImageView) view;
+                //When clicked, show correct picture
+                imagePlacing.setSelectedCardsTrue(position);
+                img.setImageResource((int)imagePlacing.getItem(position));
             }
         });
 
@@ -82,6 +90,7 @@ public class MainGame extends AppCompatActivity
         }
 
         savedInstanceState.putIntArray("save", temp);
+        savedInstanceState.putBooleanArray("selectedCards", imagePlacing.getSelectedCards());
 
         if (appSong != null) {
             try {
@@ -97,7 +106,6 @@ public class MainGame extends AppCompatActivity
     {
         super.onRestoreInstanceState(savedInstanceState);
         int[] temp = savedInstanceState.getIntArray("save");
-
         Integer[] storing = new Integer[temp.length];
         int i = 0;
 
@@ -106,7 +114,11 @@ public class MainGame extends AppCompatActivity
           storing[i++] = Integer.valueOf(address);
         }
 
-        cardTable.setAdapter(new ImagePlacing(this, storing));
+        //cardTable.setAdapter(new ImagePlacing(this, storing));
+        //Improved version that does not need new constructor anymore
+        ImagePlacing imageAdapter = (ImagePlacing) cardTable.getAdapter();
+        imageAdapter.setUserCardsIds(storing);
+        imageAdapter.setSelectedCards(savedInstanceState.getBooleanArray("selectedCards"));
     }
     public void newGameClicked(View v) {
 

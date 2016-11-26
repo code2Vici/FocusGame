@@ -52,7 +52,7 @@ public class MainGame extends AppCompatActivity
 
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked) {
-                    appSong = MediaPlayer.create(getApplicationContext(),R.raw.black_beatle);
+                    appSong = MediaPlayer.create(getApplicationContext(),R.raw.jeopardy_song);
                     appSong.start();
                     appSong.setVolume(100,100);
                     appSong.setLooping(true);

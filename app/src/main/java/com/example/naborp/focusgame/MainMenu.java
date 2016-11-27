@@ -1,6 +1,6 @@
 package com.example.naborp.focusgame;
 
-//Ubaldohfihgfdogh
+//UbaldoJimenez
 
 import android.content.Intent;
 import android.media.MediaPlayer;

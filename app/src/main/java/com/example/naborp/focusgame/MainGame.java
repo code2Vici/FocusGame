@@ -24,6 +24,7 @@ public class MainGame extends AppCompatActivity
     private int userChoice;
     private int timesClicked = 0;
     private Object savedReference;
+    private int savedReferencePosition;
     private GridView cardTable;
     private MediaPlayer appSong;
     private ToggleButton play_stop_Button;
@@ -52,32 +53,46 @@ public class MainGame extends AppCompatActivity
             {
                 Toast.makeText(MainGame.this, "" + position,Toast.LENGTH_SHORT).show();
 
-                final ImageView img = (ImageView) view;
+                ImageView img = (ImageView) view;
 
+                //First Card being faced up when clicked
                 if(timesClicked < 1)
                 {
-                    //When clicked, show correct picture
-                    imagePlacing.setSelectedCardsTrue(position);
+                    //Save image reference and its position
                     savedReference = imagePlacing.getItem(position);
+                    savedReferencePosition = position;
+
+                    //Show correct image and disable clickable on image
                     img.setImageResource((int)savedReference);
+                    img.setOnClickListener(null);
                     timesClicked++;
                 }
+                //Second Card being clicked after one is faced up
                 else
                 {
-                    imagePlacing.setSelectedCardsTrue(position);
-                    img.setImageResource((int)imagePlacing.getItem(position));
-
-
                     //Compare if two cards are identical
                     if(imagePlacing.getItem(position).equals(savedReference))
                     {
+                        //If both cards are identical, set their position to true
+                        imagePlacing.setSelectedCardsTrue(position);
+                        imagePlacing.setSelectedCardsTrue(savedReferencePosition);
+
+                        //Show correct image and disable clickable on image
                         img.setImageResource((int)imagePlacing.getItem(position));
+                        img.setOnClickListener(null);
                     }
                     else
                     {
+                        /*Save Cards and reset them to Adapter. Adapter will handle
+                        whether to leave facedown or switch back to faceup card based
+                        on selectedCards boolean array*/
+                        ImagePlacing imageAdapter = (ImagePlacing) cardTable.getAdapter();
+                        cardTable.setAdapter(imageAdapter);
 
-                        img.setImageResource((int)imagePlacing.getItem(position));
+                        //We need a delay to show second card being display
+                        //Possible Code below to delay for a few seconds
 
+                        /*
                         final Handler handler = new Handler();
 
                         Runnable runnable = new Runnable()
@@ -87,7 +102,7 @@ public class MainGame extends AppCompatActivity
                             {
                                 img.setImageResource(R.drawable.animal_10);
                                 i++;
-                                
+
                                 if(i > imagePlacing.getCount() - 1)
                                 {
                                     i=0;
@@ -96,9 +111,13 @@ public class MainGame extends AppCompatActivity
                             }
                         };
                         handler.postDelayed(runnable, 3000); //for initial delay..
+                        */
                     }
 
+                    //Reset important variables after two clicks
                     timesClicked = 0;
+                    savedReference = null;
+                    savedReferencePosition = 0;
                 }
 
             }
@@ -122,8 +141,6 @@ public class MainGame extends AppCompatActivity
                 }
             }
         });
-
-
     }
 
     public void onSaveInstanceState(Bundle savedInstanceState)
@@ -170,6 +187,7 @@ public class MainGame extends AppCompatActivity
         imageAdapter.setUserCardsIds(storing);
         imageAdapter.setSelectedCards(savedInstanceState.getBooleanArray("selectedCards"));
     }
+    //When New Game is clicked
     public void newGameClicked(View v) {
 
         Intent intent = new Intent(getApplicationContext(),MainMenu.class);
@@ -185,7 +203,7 @@ public class MainGame extends AppCompatActivity
         }
     }
 
-    //Codes for End Game Buttom
+    //When End Game Button is clicked
     public void endGameClicked(View v) {
         ImagePlacing imageAdapter = (ImagePlacing) cardTable.getAdapter();
         imageAdapter.showAll();

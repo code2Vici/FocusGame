@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.media.MediaPlayer;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.ButtonBarLayout;
@@ -21,6 +22,8 @@ import android.widget.ToggleButton;
 public class MainGame extends AppCompatActivity
 {
     private int userChoice;
+    private int timesClicked = 0;
+    private Object savedReference;
     private GridView cardTable;
     private MediaPlayer appSong;
     private ToggleButton play_stop_Button;
@@ -48,10 +51,56 @@ public class MainGame extends AppCompatActivity
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
                 Toast.makeText(MainGame.this, "" + position,Toast.LENGTH_SHORT).show();
-                ImageView img = (ImageView) view;
-                //When clicked, show correct picture
-                imagePlacing.setSelectedCardsTrue(position);
-                img.setImageResource((int)imagePlacing.getItem(position));
+
+                final ImageView img = (ImageView) view;
+
+                if(timesClicked < 1)
+                {
+                    //When clicked, show correct picture
+                    imagePlacing.setSelectedCardsTrue(position);
+                    savedReference = imagePlacing.getItem(position);
+                    img.setImageResource((int)savedReference);
+                    timesClicked++;
+                }
+                else
+                {
+                    imagePlacing.setSelectedCardsTrue(position);
+                    img.setImageResource((int)imagePlacing.getItem(position));
+
+
+                    //Compare if two cards are identical
+                    if(imagePlacing.getItem(position).equals(savedReference))
+                    {
+                        img.setImageResource((int)imagePlacing.getItem(position));
+                    }
+                    else
+                    {
+
+                        img.setImageResource((int)imagePlacing.getItem(position));
+
+                        final Handler handler = new Handler();
+
+                        Runnable runnable = new Runnable()
+                        {
+                            int i=0;
+                            public void run()
+                            {
+                                img.setImageResource(R.drawable.animal_10);
+                                i++;
+                                
+                                if(i > imagePlacing.getCount() - 1)
+                                {
+                                    i=0;
+                                }
+                                handler.postDelayed(this, 50);  //for interval...
+                            }
+                        };
+                        handler.postDelayed(runnable, 3000); //for initial delay..
+                    }
+
+                    timesClicked = 0;
+                }
+
             }
         });
 

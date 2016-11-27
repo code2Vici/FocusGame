@@ -154,4 +154,5 @@ public class ImagePlacing extends BaseAdapter {
         }
         return imageView;
     }
+
 }

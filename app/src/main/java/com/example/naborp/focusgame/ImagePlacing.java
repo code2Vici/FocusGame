@@ -154,19 +154,4 @@ public class ImagePlacing extends BaseAdapter {
         }
         return imageView;
     }
-    public View getView(int position, View convertView) {
-
-        ImageView imageView;
-        imageView = (ImageView) convertView;
-
-        //Display background card if false
-        if (!selectedCards[position]) {
-            imageView.setImageResource(R.drawable.animal_10);
-        } else {
-            imageView.setImageResource(userCardsIds[position]);
-        }
-
-        return imageView;
-
-    }
 }

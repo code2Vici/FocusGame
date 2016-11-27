@@ -125,6 +125,13 @@ public class ImagePlacing extends BaseAdapter {
 
     public void setSelectedCards (boolean[] selectedCards) { this.selectedCards = selectedCards; }
 
+    public void showAll () {
+        for (int i = 0; i < selectedCards.length; ++i) {
+            selectedCards[i] = true;
+
+        }
+    }
+
     public View getView(int position, View convertView, ViewGroup parent)
     {
         ImageView imageView;

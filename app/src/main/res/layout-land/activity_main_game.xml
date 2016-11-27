@@ -47,7 +47,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/endGame"
             android:text="End Game"
-            android:layout_width="wrap_content" />
+            android:layout_width="wrap_content"
+            android:onClick="endGameClicked" />
 
         <ToggleButton
             android:text="Music ON/OFF"

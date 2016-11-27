@@ -74,6 +74,7 @@ public class MainGame extends AppCompatActivity
             }
         });
 
+
     }
 
     public void onSaveInstanceState(Bundle savedInstanceState)
@@ -133,5 +134,12 @@ public class MainGame extends AppCompatActivity
                 appSong = null;
             }
         }
+    }
+
+    //Codes for End Game Buttom
+    public void endGameClicked(View v) {
+        ImagePlacing imageAdapter = (ImagePlacing) cardTable.getAdapter();
+        imageAdapter.showAll();
+        cardTable.setAdapter(imageAdapter);
     }
 }

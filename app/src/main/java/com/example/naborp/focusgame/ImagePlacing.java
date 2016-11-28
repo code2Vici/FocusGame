@@ -116,6 +116,7 @@ public class ImagePlacing extends BaseAdapter {
 
     public boolean[] getSelectedCards() { return selectedCards; }
 
+    public boolean isSelected(int position) {return selectedCards[position] == true;}
     public void setUserCardsIds(Integer[] userCardsIds)
     {
         this.userCardsIds = userCardsIds;

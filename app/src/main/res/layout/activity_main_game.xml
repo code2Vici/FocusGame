@@ -43,7 +43,7 @@
             android:id="@+id/tryAgain"
             android:text="Try Again"
             android:layout_width="wrap_content"
-            android:onClick="tryAgainClicked"/>
+            android:onClick="tryAgainClicked" />
 
         <Button
             android:layout_height="wrap_content"
@@ -62,5 +62,17 @@
             android:layout_above="@+id/linearLayout"
             android:layout_centerHorizontal="true" />
     </LinearLayout>
+
+    <TextView
+        android:textSize="20sp"
+        android:textColor="#ff0000"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/score"
+        android:layout_marginLeft="7dp"
+        android:layout_marginStart="7dp"
+        android:layout_below="@+id/cardTable"
+        android:layout_alignLeft="@+id/linearLayout"
+        android:layout_alignStart="@+id/linearLayout" />
 
 </RelativeLayout>

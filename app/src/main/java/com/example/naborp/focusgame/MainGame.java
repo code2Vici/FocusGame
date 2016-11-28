@@ -16,23 +16,25 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
 public class MainGame extends AppCompatActivity
 {
     private int userChoice;
+    private int score;
     //private int timesClicked = 0;
     //private Object savedReference;
-    // private int savedReferencePosition;
-
-    /*Making it batter to hold position
-      User should not modify this object */
+    //Making it batter to hold position
     private int[] savedReference;
+    //User should not modify this object
     private GridView cardTable;
+    private TextView scoreView;
     private MediaPlayer appSong;
     private ToggleButton play_stop_Button;
     //This field stores the instance of ImagePlacing object
+    //User should not modify this object
     private ImagePlacing imagePlacing;
 
     @Override
@@ -40,38 +42,36 @@ public class MainGame extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_game);
-
         //Added position array instance
         savedReference = new int[] {-1, -1};
-
+        //Set score to 0
+        score = 0;
         Bundle b = getIntent().getExtras();
         this.userChoice = b.getInt("userChoice");
         System.out.println("userChoice" + userChoice);
 
         cardTable = (GridView) findViewById(R.id.cardTable);
+        //Get score view
+        scoreView = (TextView) findViewById(R.id.score);
+        scoreView.setText("Score: " + score);
 
         //Problem call
 
         cardTable.setAdapter(imagePlacing = new ImagePlacing(this, userChoice));
-        cardTable.setOnItemClickListener(new AdapterView.OnItemClickListener()
-        {
+        cardTable.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-            {
-                Toast.makeText(MainGame.this, "" + position,Toast.LENGTH_SHORT).show();
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(MainGame.this, "" + position, Toast.LENGTH_SHORT).show();
 
-                ImageView img = (ImageView) view;
-
-                //Start of Shun's Code//
-
-                //Check if at dead end state
-                if (savedReference[1] == -1) {
+                final ImageView img = (ImageView) view;
+                //Check if at dead end state && card is unselected
+                if (savedReference[1] == -1 && !imagePlacing.isSelected(position)) {
                     //I will use savedReference to count
                     if (savedReference[0] == -1) {
                         //When clicked, show correct picture
                         imagePlacing.setSelectedCardsTrue(position);
                         savedReference[0] = position;
-                        img.setImageResource((int) imagePlacing.getItem(position));  //This line might move to below outside block
+                        img.setImageResource((int) imagePlacing.getItem(position));       //This line might move to below outside block
                         //timesClicked++;
                     } else {
                         savedReference[1] = position;
@@ -85,83 +85,45 @@ public class MainGame extends AppCompatActivity
                             savedReference[1] = -1;
                             //img.setImageResource((int)imagePlacing.getItem(position));
                             //Continue of code, + 2 scores
+                            score = score + 2;
+                            scoreView.setText("Score: " + score);
                             //Or end game when all cards revealed
                         } else {
                             System.out.println("In -1 score block");
-                            //-1 score, or now allow user to click other cards
-                        }
-                    }
-                }   //End of Shun's Code
-
-
-                /* Start of Ubaldo's Code
-
-                //First Card being faced up when clicked
-                if(timesClicked < 1)
-                {
-                    //Save image reference and its position
-                    savedReference = imagePlacing.getItem(position);
-                    savedReferencePosition = position;
-
-                    //Show correct image and disable clickable on image
-                    img.setImageResource((int)savedReference);
-                    img.setOnClickListener(null);
-                    timesClicked++;
-                }
-                //Second Card being clicked after one is faced up
-                else
-                {
-                    //Compare if two cards are identical
-                    if(imagePlacing.getItem(position).equals(savedReference))
-                    {
-                        //If both cards are identical, set their position to true
-                        imagePlacing.setSelectedCardsTrue(position);
-                        imagePlacing.setSelectedCardsTrue(savedReferencePosition);
-
-                        //Show correct image and disable clickable on image
-                        img.setImageResource((int)imagePlacing.getItem(position));
-                        img.setOnClickListener(null);
-                    }
-                    else
-                    {
-                        /*Save Cards and reset them to Adapter. Adapter will handle
-                        whether to leave facedown or switch back to faceup card based
-                        on selectedCards boolean array*/
-                       //ImagePlacing imageAdapter = (ImagePlacing) cardTable.getAdapter();
-                        //cardTable.setAdapter(imageAdapter);
-
-                        //We need a delay to show second card being display
-                        //Possible Code below to delay for a few seconds
-
-                        /*This is commented//
-                        final Handler handler = new Handler();
-
-                        Runnable runnable = new Runnable()
-                        {
-                            int i=0;
-                            public void run()
-                            {
-                                img.setImageResource(R.drawable.animal_10);
-                                i++;
-
-                                if(i > imagePlacing.getCount() - 1)
-                                {
-                                    i=0;
-                                }
-                                handler.postDelayed(this, 50);  //for interval...
+                            if (score > 0) {
+                                score = score - 1;
                             }
-                        };
-                        handler.postDelayed(runnable, 3000); //for initial delay..
-                        //This is the end of commented//
+                            scoreView.setText("Score: " + score);
+                            //-1 score, or now allow user to click other cards
+
+
+//                        img.setImageResource((int)imagePlacing.getItem(position));
+//
+//                        final Handler handler = new Handler();
+//
+//                        Runnable runnable = new Runnable()
+//                        {
+//                            int i=0;
+//                            public void run()
+//                            {
+//                                img.setImageResource(R.drawable.animal_10);
+//                                i++;
+//
+//                                if(i > imagePlacing.getCount() - 1)
+//                                {
+//                                    i=0;
+//                                }
+//                                handler.postDelayed(this, 50);  //for interval...
+//                            }
+//                        };
+//                        handler.postDelayed(runnable, 3000); //for initial delay..
+
+
+                        }
+
+                        //timesClicked = 0;
                     }
-
-                    //Reset important variables after two clicks
-                    timesClicked = 0;
-                    savedReference = null;
-                    savedReferencePosition = 0;
                 }
-
-                End of Ubaldo's Code */
 
             }
         });
@@ -184,6 +146,8 @@ public class MainGame extends AppCompatActivity
                 }
             }
         });
+
+
     }
 
     public void onSaveInstanceState(Bundle savedInstanceState)
@@ -201,6 +165,8 @@ public class MainGame extends AppCompatActivity
 
         savedInstanceState.putIntArray("save", temp);
         savedInstanceState.putBooleanArray("selectedCards", imagePlacing.getSelectedCards());
+        savedInstanceState.putIntArray("savedReference", savedReference);
+        savedInstanceState.putInt("score", score);
 
         if (appSong != null) {
             try {
@@ -229,8 +195,10 @@ public class MainGame extends AppCompatActivity
         ImagePlacing imageAdapter = (ImagePlacing) cardTable.getAdapter();
         imageAdapter.setUserCardsIds(storing);
         imageAdapter.setSelectedCards(savedInstanceState.getBooleanArray("selectedCards"));
+        savedReference = savedInstanceState.getIntArray("savedReference");
+        score = savedInstanceState.getInt("score");
+        scoreView.setText("Score: " + score);
     }
-    //When New Game is clicked
     public void newGameClicked(View v) {
 
         Intent intent = new Intent(getApplicationContext(),MainMenu.class);
@@ -246,25 +214,24 @@ public class MainGame extends AppCompatActivity
         }
     }
 
-    //When End Game Button is clicked
+    //Codes for End Game Buttom
     public void endGameClicked(View v) {
         ImagePlacing imageAdapter = (ImagePlacing) cardTable.getAdapter();
         imageAdapter.showAll();
         cardTable.setAdapter(imageAdapter);
     }
 
-    //When Try Again Button is clicked
+    //Codes for Try Again Buttom
     public void tryAgainClicked(View v) {
         ImagePlacing imageAdapter = (ImagePlacing) cardTable.getAdapter();
-
         if (savedReference[0] != -1 && savedReference[1] != -1) {
             for (int position : savedReference) {
                 imageAdapter.setSelectedCardsFalse(position);
             }
-
             savedReference[0] = -1;
             savedReference[1] = -1;
             cardTable.setAdapter(imageAdapter);
         }
     }
+
 }

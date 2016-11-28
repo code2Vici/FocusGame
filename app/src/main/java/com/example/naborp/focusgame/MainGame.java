@@ -26,7 +26,7 @@ public class MainGame extends AppCompatActivity
     private int score;
     //private int timesClicked = 0;
     //private Object savedReference;
-    //Making it batter to hold position
+    //Making it better to hold position
     private int[] savedReference;
     //User should not modify this object
     private GridView cardTable;
@@ -63,7 +63,7 @@ public class MainGame extends AppCompatActivity
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(MainGame.this, "" + position, Toast.LENGTH_SHORT).show();
 
-                final ImageView img = (ImageView) view;
+                ImageView img = (ImageView) view;
                 //Check if at dead end state && card is unselected
                 if (savedReference[1] == -1 && !imagePlacing.isSelected(position)) {
                     //I will use savedReference to count
@@ -71,8 +71,7 @@ public class MainGame extends AppCompatActivity
                         //When clicked, show correct picture
                         imagePlacing.setSelectedCardsTrue(position);
                         savedReference[0] = position;
-                        img.setImageResource((int) imagePlacing.getItem(position));       //This line might move to below outside block
-                        //timesClicked++;
+                        img.setImageResource((int) imagePlacing.getItem(position)); //This line might move to below outside block
                     } else {
                         savedReference[1] = position;
                         imagePlacing.setSelectedCardsTrue(position);
@@ -95,39 +94,14 @@ public class MainGame extends AppCompatActivity
                             }
                             scoreView.setText("Score: " + score);
                             //-1 score, or now allow user to click other cards
-
-
-//                        img.setImageResource((int)imagePlacing.getItem(position));
-//
-//                        final Handler handler = new Handler();
-//
-//                        Runnable runnable = new Runnable()
-//                        {
-//                            int i=0;
-//                            public void run()
-//                            {
-//                                img.setImageResource(R.drawable.animal_10);
-//                                i++;
-//
-//                                if(i > imagePlacing.getCount() - 1)
-//                                {
-//                                    i=0;
-//                                }
-//                                handler.postDelayed(this, 50);  //for interval...
-//                            }
-//                        };
-//                        handler.postDelayed(runnable, 3000); //for initial delay..
-
-
                         }
-
-                        //timesClicked = 0;
                     }
                 }
 
             }
         });
 
+        //Music
         play_stop_Button = (ToggleButton) findViewById(R.id.play_stop_Button);
         play_stop_Button.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
 
@@ -150,13 +124,14 @@ public class MainGame extends AppCompatActivity
 
     }
 
+    //Save Data from Current Activity
     public void onSaveInstanceState(Bundle savedInstanceState)
     {
         super.onSaveInstanceState(savedInstanceState);
 
         int totalsavedCards = userChoice * 2;
 
-        int[] temp = new int[totalsavedCards ];
+        int[] temp = new int[totalsavedCards];
 
         for(int i = 0; i < totalsavedCards ; i++)
         {
@@ -178,6 +153,7 @@ public class MainGame extends AppCompatActivity
         }
     }
     @Override
+    //Restore Data from previous destroyed activity
     public void onRestoreInstanceState(Bundle savedInstanceState)
     {
         super.onRestoreInstanceState(savedInstanceState);
@@ -199,6 +175,7 @@ public class MainGame extends AppCompatActivity
         score = savedInstanceState.getInt("score");
         scoreView.setText("Score: " + score);
     }
+    //When New Game Button is clicked
     public void newGameClicked(View v) {
 
         Intent intent = new Intent(getApplicationContext(),MainMenu.class);
@@ -214,14 +191,14 @@ public class MainGame extends AppCompatActivity
         }
     }
 
-    //Codes for End Game Buttom
+    ////When End Game Button is clicked
     public void endGameClicked(View v) {
         ImagePlacing imageAdapter = (ImagePlacing) cardTable.getAdapter();
         imageAdapter.showAll();
         cardTable.setAdapter(imageAdapter);
     }
 
-    //Codes for Try Again Buttom
+    //When Try Again Button is clicked
     public void tryAgainClicked(View v) {
         ImagePlacing imageAdapter = (ImagePlacing) cardTable.getAdapter();
         if (savedReference[0] != -1 && savedReference[1] != -1) {

@@ -42,7 +42,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/tryAgain"
             android:text="Try Again"
-            android:layout_width="wrap_content" />
+            android:layout_width="wrap_content"
+            android:onClick="tryAgainClicked"/>
 
         <Button
             android:layout_height="wrap_content"

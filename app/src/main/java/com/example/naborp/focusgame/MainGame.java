@@ -22,9 +22,13 @@ import android.widget.ToggleButton;
 public class MainGame extends AppCompatActivity
 {
     private int userChoice;
-    private int timesClicked = 0;
-    private Object savedReference;
-    private int savedReferencePosition;
+    //private int timesClicked = 0;
+    //private Object savedReference;
+    // private int savedReferencePosition;
+
+    /*Making it batter to hold position
+      User should not modify this object */
+    private int[] savedReference;
     private GridView cardTable;
     private MediaPlayer appSong;
     private ToggleButton play_stop_Button;
@@ -36,6 +40,9 @@ public class MainGame extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_game);
+
+        //Added position array instance
+        savedReference = new int[] {-1, -1};
 
         Bundle b = getIntent().getExtras();
         this.userChoice = b.getInt("userChoice");
@@ -54,6 +61,40 @@ public class MainGame extends AppCompatActivity
                 Toast.makeText(MainGame.this, "" + position,Toast.LENGTH_SHORT).show();
 
                 ImageView img = (ImageView) view;
+
+                //Start of Shun's Code//
+
+                //Check if at dead end state
+                if (savedReference[1] == -1) {
+                    //I will use savedReference to count
+                    if (savedReference[0] == -1) {
+                        //When clicked, show correct picture
+                        imagePlacing.setSelectedCardsTrue(position);
+                        savedReference[0] = position;
+                        img.setImageResource((int) imagePlacing.getItem(position));  //This line might move to below outside block
+                        //timesClicked++;
+                    } else {
+                        savedReference[1] = position;
+                        imagePlacing.setSelectedCardsTrue(position);
+                        img.setImageResource((int) imagePlacing.getItem(position));
+                        //Continue
+
+                        //Compare if two cards are identical
+                        if (imagePlacing.getItem(savedReference[0]).equals(imagePlacing.getItem(savedReference[1]))) {
+                            savedReference[0] = -1;
+                            savedReference[1] = -1;
+                            //img.setImageResource((int)imagePlacing.getItem(position));
+                            //Continue of code, + 2 scores
+                            //Or end game when all cards revealed
+                        } else {
+                            System.out.println("In -1 score block");
+                            //-1 score, or now allow user to click other cards
+                        }
+                    }
+                }   //End of Shun's Code
+
+
+                /* Start of Ubaldo's Code
 
                 //First Card being faced up when clicked
                 if(timesClicked < 1)
@@ -86,13 +127,13 @@ public class MainGame extends AppCompatActivity
                         /*Save Cards and reset them to Adapter. Adapter will handle
                         whether to leave facedown or switch back to faceup card based
                         on selectedCards boolean array*/
-                        ImagePlacing imageAdapter = (ImagePlacing) cardTable.getAdapter();
-                        cardTable.setAdapter(imageAdapter);
+                       //ImagePlacing imageAdapter = (ImagePlacing) cardTable.getAdapter();
+                        //cardTable.setAdapter(imageAdapter);
 
                         //We need a delay to show second card being display
                         //Possible Code below to delay for a few seconds
 
-                        /*
+                        /*This is commented//
                         final Handler handler = new Handler();
 
                         Runnable runnable = new Runnable()
@@ -111,7 +152,7 @@ public class MainGame extends AppCompatActivity
                             }
                         };
                         handler.postDelayed(runnable, 3000); //for initial delay..
-                        */
+                        //This is the end of commented//
                     }
 
                     //Reset important variables after two clicks
@@ -119,6 +160,8 @@ public class MainGame extends AppCompatActivity
                     savedReference = null;
                     savedReferencePosition = 0;
                 }
+
+                End of Ubaldo's Code */
 
             }
         });
@@ -208,5 +251,20 @@ public class MainGame extends AppCompatActivity
         ImagePlacing imageAdapter = (ImagePlacing) cardTable.getAdapter();
         imageAdapter.showAll();
         cardTable.setAdapter(imageAdapter);
+    }
+
+    //When Try Again Button is clicked
+    public void tryAgainClicked(View v) {
+        ImagePlacing imageAdapter = (ImagePlacing) cardTable.getAdapter();
+
+        if (savedReference[0] != -1 && savedReference[1] != -1) {
+            for (int position : savedReference) {
+                imageAdapter.setSelectedCardsFalse(position);
+            }
+
+            savedReference[0] = -1;
+            savedReference[1] = -1;
+            cardTable.setAdapter(imageAdapter);
+        }
     }
 }

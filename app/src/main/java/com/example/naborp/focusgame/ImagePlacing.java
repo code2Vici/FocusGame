@@ -123,6 +123,8 @@ public class ImagePlacing extends BaseAdapter {
 
     public void setSelectedCardsTrue(int position) { this.selectedCards[position] = true; }
 
+    public void setSelectedCardsFalse(int position) { this.selectedCards[position] = false; }
+
     public void setSelectedCards (boolean[] selectedCards) { this.selectedCards = selectedCards; }
 
     public void showAll () {

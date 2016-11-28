@@ -24,8 +24,6 @@ public class MainGame extends AppCompatActivity
 {
     private int userChoice;
     private int score;
-    //private int timesClicked = 0;
-    //private Object savedReference;
     //Making it better to hold position
     private int[] savedReference;
     //User should not modify this object
@@ -82,7 +80,7 @@ public class MainGame extends AppCompatActivity
                         if (imagePlacing.getItem(savedReference[0]).equals(imagePlacing.getItem(savedReference[1]))) {
                             savedReference[0] = -1;
                             savedReference[1] = -1;
-                            //img.setImageResource((int)imagePlacing.getItem(position));
+
                             //Continue of code, + 2 scores
                             score = score + 2;
                             scoreView.setText("Score: " + score);
@@ -152,8 +150,8 @@ public class MainGame extends AppCompatActivity
             }
         }
     }
-    @Override
     //Restore Data from previous destroyed activity
+    @Override
     public void onRestoreInstanceState(Bundle savedInstanceState)
     {
         super.onRestoreInstanceState(savedInstanceState);

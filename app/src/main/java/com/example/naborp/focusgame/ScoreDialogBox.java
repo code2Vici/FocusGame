@@ -15,6 +15,9 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.io.*;
 import java.util.*;
@@ -22,12 +25,17 @@ import java.util.*;
 public class ScoreDialogBox extends Dialog implements android.view.View.OnClickListener {
 
     private HashMap<Integer, String> data;
+   // private TreeMap<Integer, String> showData;
     private Activity c;
     private int userChoice;
     private int score;
     private Dialog d;
     private Button submit;
     private EditText username;
+    private TextView scoreText;
+    private TextView score1;
+    private TextView score2;
+    private TextView score3;
     private ImageButton close;
 
     public ScoreDialogBox(Activity a, int userChoice, int score) {
@@ -36,6 +44,7 @@ public class ScoreDialogBox extends Dialog implements android.view.View.OnClickL
         this.userChoice = userChoice;
         this.score = score;
         data = new HashMap<Integer, String>();
+        //showData = new TreeMap<>();
     }
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +53,34 @@ public class ScoreDialogBox extends Dialog implements android.view.View.OnClickL
         setContentView(R.layout.dialog);
         submit = (Button) findViewById(R.id.button);
         username = (EditText) findViewById(R.id.editText);
+
+        scoreText = (TextView) findViewById(R.id.textView);
+        scoreText.setText("Your new score is " + score + " points !");
+
+        score1 = (TextView) findViewById(R.id.score1);
+        score2 = (TextView) findViewById(R.id.score2);
+        score3 = (TextView) findViewById(R.id.score3);
+
+        //read file
+        InputStream is = c.getResources().openRawResource(fileReaderHelper(userChoice));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+
+        String s;
+        ArrayList<String> scoreList = new ArrayList<>();
+        try {
+            while((s = reader.readLine()) != null)
+            {
+                scoreList.add(s);
+            }
+
+            score1.setText(scoreList.get(0));
+            score2.setText(scoreList.get(1));
+            score3.setText(scoreList.get(2));
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         close = (ImageButton) findViewById(R.id.closeButton);
         submit.setOnClickListener(this);
         close.setOnClickListener(this);
@@ -57,6 +94,8 @@ public class ScoreDialogBox extends Dialog implements android.view.View.OnClickL
                 try {
                     fileHandler(userChoice);
                     dismiss();
+                    Intent intent = new Intent(c, MainMenu.class);
+                    c.startActivity(intent);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -108,7 +147,7 @@ public class ScoreDialogBox extends Dialog implements android.view.View.OnClickL
         }*/
 
         boolean newHighScore = false;
-        Map<Integer, String> treeMap = new TreeMap<Integer, String>(data);
+        TreeMap<Integer, String> treeMap = new TreeMap<>(data);
         Integer scoreFromTxt = treeMap.keySet().iterator().next();
 
         if(Integer.valueOf(score) > scoreFromTxt)
@@ -117,7 +156,7 @@ public class ScoreDialogBox extends Dialog implements android.view.View.OnClickL
             treeMap.put(Integer.valueOf(score), username.getText().toString());
         }
 
-        OutputStreamWriter outputStreamWriter = new OutputStreamWriter(c.openFileOutput("/card4highscore.txt", c.MODE_PRIVATE));
+        OutputStreamWriter outputStreamWriter = new OutputStreamWriter(c.openFileOutput("card4highscore.txt", c.MODE_PRIVATE));
 
         String newScore;
 
@@ -128,12 +167,16 @@ public class ScoreDialogBox extends Dialog implements android.view.View.OnClickL
             newScore = treeMap.get(str) + ":" + tmpname;
             outputStreamWriter.write(newScore);
             System.out.println(newScore);
+            //System.out.println(str + " " + treeMap.get(str));
         }
         outputStreamWriter.flush();
         outputStreamWriter.close();
 
     }
 
+    private void showFile() {
+
+    }
 
     private int fileReaderHelper(int ch) {
 

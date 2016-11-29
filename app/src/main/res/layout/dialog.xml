@@ -1,15 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum="1">
-
-    <ListView
-        android:layout_width="322dp"
-        android:layout_height="200dp"
-        android:layout_weight="0.13"
-        android:layout_x="28dp" />
 
     <Button
         android:text="Enter"
@@ -39,14 +34,18 @@
 
     <TextView
         android:text="TextView"
-        android:layout_width="308dp"
-        android:layout_height="51dp"
+        android:layout_height="97dp"
         android:layout_alignLeft="@+id/button"
         android:layout_alignStart="@+id/button"
         android:id="@+id/textView"
         android:layout_alignParentTop="true"
         android:layout_x="37dp"
-        android:layout_y="248dp" />
+        android:layout_y="248dp"
+        android:layout_width="308dp"
+        android:textAppearance="@android:style/TextAppearance.Large"
+        tools:textColor="#ff0000"
+        android:textSize="24sp"
+        android:textColor="@android:color/holo_red_dark" />
 
     <ImageButton
         android:layout_width="wrap_content"
@@ -55,4 +54,31 @@
         android:layout_x="323dp"
         android:layout_y="1dp"
         android:id="@+id/closeButton" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="100dp"
+        android:layout_y="68dp"
+        android:id="@+id/score2"
+        android:textSize="24sp" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="100dp"
+        android:layout_y="34dp"
+        android:id="@+id/score1"
+        android:textSize="24sp" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="112dp"
+        android:layout_height="wrap_content"
+        android:layout_x="98dp"
+        android:layout_y="100dp"
+        android:id="@+id/score3"
+        android:textSize="24sp" />
 </AbsoluteLayout>

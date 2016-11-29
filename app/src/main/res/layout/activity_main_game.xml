@@ -14,10 +14,10 @@
     <GridView
         android:id="@+id/cardTable"
         android:layout_width="match_parent"
-        android:layout_height="377dp"
-        android:background="#FFFFFF"
+        android:layout_height="500dp"
+        android:background="#51b46d"
         android:numColumns="4"
-        android:columnWidth="90dp"
+        android:columnWidth="50dp"
         android:verticalSpacing="10dp"
         android:horizontalSpacing="10dp"
         android:layout_x="1dp"
@@ -42,13 +42,15 @@
             android:layout_height="wrap_content"
             android:id="@+id/tryAgain"
             android:text="Try Again"
-            android:layout_width="wrap_content" />
+            android:layout_width="wrap_content"
+            android:onClick="tryAgainClicked" />
 
         <Button
             android:layout_height="wrap_content"
             android:id="@+id/endGame"
             android:text="End Game"
-            android:layout_width="wrap_content" />
+            android:layout_width="wrap_content"
+            android:onClick="endGameClicked" />
 
         <ToggleButton
             android:text="Music ON/OFF"
@@ -60,5 +62,17 @@
             android:layout_above="@+id/linearLayout"
             android:layout_centerHorizontal="true" />
     </LinearLayout>
+
+    <TextView
+        android:textSize="20sp"
+        android:textColor="#ff0000"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/score"
+        android:layout_marginLeft="7dp"
+        android:layout_marginStart="7dp"
+        android:layout_below="@+id/cardTable"
+        android:layout_alignLeft="@+id/linearLayout"
+        android:layout_alignStart="@+id/linearLayout" />
 
 </RelativeLayout>

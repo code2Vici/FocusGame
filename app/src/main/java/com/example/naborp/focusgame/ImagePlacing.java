@@ -116,6 +116,8 @@ public class ImagePlacing extends BaseAdapter {
 
     public boolean[] getSelectedCards() { return selectedCards; }
 
+    public boolean isSelected(int position) {return selectedCards[position] == true;}
+
     public void setUserCardsIds(Integer[] userCardsIds)
     {
         this.userCardsIds = userCardsIds;
@@ -123,15 +125,32 @@ public class ImagePlacing extends BaseAdapter {
 
     public void setSelectedCardsTrue(int position) { this.selectedCards[position] = true; }
 
+    public void setSelectedCardsFalse(int position) { this.selectedCards[position] = false; }
+
     public void setSelectedCards (boolean[] selectedCards) { this.selectedCards = selectedCards; }
 
+    public void showAll () {
+        for (int i = 0; i < selectedCards.length; ++i) {
+            selectedCards[i] = true;
+
+        }
+    }
+    public boolean isGameFinished(){
+        for(boolean eachCard: selectedCards) {
+            if(!eachCard) {
+                return false;
+            }
+        }
+
+        return true;
+    }
     public View getView(int position, View convertView, ViewGroup parent)
     {
         ImageView imageView;
 
         if (convertView == null) {
             imageView = new ImageView(mContext);
-            imageView.setLayoutParams(new GridView.LayoutParams(200,200));
+            imageView.setLayoutParams(new GridView.LayoutParams(280,280));
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         }
         else {

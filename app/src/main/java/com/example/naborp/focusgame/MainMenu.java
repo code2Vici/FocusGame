@@ -1,22 +1,16 @@
 package com.example.naborp.focusgame;
 
-//Ubaldohfihgfdogh
+//UbaldoJimenez, Shun, Nabor and Eric
 
 import android.content.Intent;
-import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.CompoundButton;
 import android.widget.Spinner;
-import android.widget.ToggleButton;
 
 public class MainMenu extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
-
-    private MediaPlayer appSong;
-    private ToggleButton play_stop_Button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -35,6 +29,7 @@ public class MainMenu extends AppCompatActivity implements AdapterView.OnItemSel
         cardChoice.setOnItemSelectedListener(this);
     }
 
+    //When user selects an option from dropdown menu
     public void onItemSelected(AdapterView<?> parent, View v, int position, long id)
     {
         MainGame startGame;

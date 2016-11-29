@@ -66,19 +66,19 @@
 
     <TextView
         android:text="TextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_x="100dp"
-        android:layout_y="34dp"
-        android:id="@+id/score1"
-        android:textSize="24sp" />
-
-    <TextView
-        android:text="TextView"
         android:layout_width="112dp"
         android:layout_height="wrap_content"
         android:layout_x="98dp"
         android:layout_y="100dp"
         android:id="@+id/score3"
+        android:textSize="24sp" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="97dp"
+        android:layout_y="34dp"
+        android:id="@+id/score1"
         android:textSize="24sp" />
 </AbsoluteLayout>

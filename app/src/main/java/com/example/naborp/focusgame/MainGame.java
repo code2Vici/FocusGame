@@ -59,7 +59,7 @@ public class MainGame extends AppCompatActivity
         cardTable.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(MainGame.this, "" + position, Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainGame.this, "" + position, Toast.LENGTH_SHORT);
 
                 ImageView img = (ImageView) view;
                 //Check if at dead end state && card is unselected
@@ -81,7 +81,7 @@ public class MainGame extends AppCompatActivity
                             savedReference[0] = -1;
                             savedReference[1] = -1;
 
-                            //Continue of code, + 2 scores
+                            //Contintue of code, + 2 scores
                             score = score + 2;
                             scoreView.setText("Score: " + score);
                             //Or end game when all cards revealed

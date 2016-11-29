@@ -1,7 +1,7 @@
 package com.example.naborp.focusgame;
 
 /**
- * Created by Eric on 11/28/2016.
+ * Created by Eric on 11/28/2016..
  */
 
 import android.app.Activity;

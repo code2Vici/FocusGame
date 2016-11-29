@@ -20,18 +20,20 @@ import java.util.*;
 
 public class ScoreDialogBox extends Dialog implements android.view.View.OnClickListener {
 
-    private HashMap<String, Integer> score;
+    private HashMap<Integer, String> data;
     private Activity c;
     private int userChoice;
+    private int score;
     private Dialog d;
     private Button submit;
     private ImageButton close;
 
-    public ScoreDialogBox(Activity a, int userChoice) {
+    public ScoreDialogBox(Activity a, int userChoice, int score) {
         super(a);
         this.c = a;
         this.userChoice = userChoice;
-        score = new HashMap<String, Integer>();
+        this.score = score;
+        data = new HashMap<Integer, String>();
     }
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,29 +69,77 @@ public class ScoreDialogBox extends Dialog implements android.view.View.OnClickL
     }
 
     private void fileHandler(int userChoice) throws IOException {
-        String filename = "R.raw." + (userChoice * 2) + "cardHighScore";
-        File f = new File(filename);
-        if (!f.exists())
+
+        InputStream is = c.getResources().openRawResource(fileReaderHelper(userChoice));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+
+        String s;
+        while((s = reader.readLine()) != null)
         {
-            PrintWriter pw = new PrintWriter(new FileWriter(filename));
-            //for (int i = 0; i < scores.size(); ++i) {
-            //    pw.println(scores.get(i));
-            //}
 
-            pw.flush();
-            pw.close();
+            //String s = reader.readLine();
+            char[] arr = s.toCharArray();
+            String name = "";
+            String score ="";
+            boolean b = true;
+
+            for (int i = 0; i < arr.length; ++i) {
+                if (arr[i] != ':' && b) {
+                    name += arr[i];
+                }
+                else if (arr[i] == ':') {
+                    b = false;
+                }
+                else {
+                    score += arr[i];
+                }
+            }
+
+            data.put(Integer.valueOf(score), name);
+
         }
 
-        BufferedReader reader = new BufferedReader(new FileReader(filename));
+        /*for (Map.Entry<String, Integer> entry : data.entrySet()) {
+            System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue());
 
-        String line = reader.readLine();
-        //scores.add(0, new UserScore(line));
-        //scores.remove(scores.size() - 1);
+        }*/
 
-        for (int i = 1; i < 5; ++i) {
-            line = reader.readLine();
-         //   scores.add(i, new UserScore(line));
-         //   scores.remove(scores.size() - 1);
+        Map<Integer, String> treeMap = new TreeMap<Integer, String>(data);
+        for (Integer str : treeMap.keySet()) {
+            System.out.println(str);
         }
+
     }
+
+
+    private int fileReaderHelper(int ch) {
+
+        switch (ch) {
+            case 2:
+                return R.raw.card4highscore;
+            case 3:
+                return R.raw.card6highscore;
+            case 4:
+                return R.raw.card8highscore;
+            case 5:
+                return R.raw.card10highscore;
+            case 6:
+                return R.raw.card12highscore;
+            case 7:
+                return R.raw.card14highscore;
+            case 8:
+                return R.raw.card16highscore;
+            case 9:
+                return R.raw.card18highscore;
+            case 10:
+                return R.raw.card20highscore;
+        }
+
+        return -1;
+    }
+
 }
+
+
+
+

@@ -98,7 +98,7 @@ public class MainGame extends AppCompatActivity
 
                 //finish game
                 if(imagePlacing.isGameFinished()) {
-                    ScoreDialogBox dialog = new ScoreDialogBox(MainGame.this, userChoice);
+                    ScoreDialogBox dialog = new ScoreDialogBox(MainGame.this, userChoice, score);
                     dialog.show();
                 }
 

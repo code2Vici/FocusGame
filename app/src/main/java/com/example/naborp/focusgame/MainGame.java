@@ -96,6 +96,19 @@ public class MainGame extends AppCompatActivity
                     }
                 }
 
+                //finish game
+                boolean[] tmpBool = imagePlacing.getSelectedCards();
+                boolean finishGame = true;
+                for(boolean eachCard: tmpBool) {
+                    if(!eachCard) {
+                        finishGame = false;
+                    }
+                }
+                if(finishGame) {
+                    ScoreDialogBox dialog = new ScoreDialogBox(MainGame.this);
+                    dialog.show();
+                }
+
             }
         });
 

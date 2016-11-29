@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+    <EditText
+        android:layout_width="320dp"
+        android:layout_height="53dp"
+        android:inputType="textPersonName"
+        android:text=""
+        android:ems="10"
+        android:id="@+id/editText"
+        android:layout_weight="0.17"
+        android:layout_marginBottom="17dp"
+        android:layout_above="@+id/button"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_x="64dp"
+        android:layout_y="228dp" />
+
+    <Button
+        android:text="Enter"
+        android:layout_width="155dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="33dp"
+        android:id="@+id/button"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_x="418dp"
+        android:layout_y="229dp" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="308dp"
+        android:layout_height="51dp"
+        android:layout_alignLeft="@+id/button"
+        android:layout_alignStart="@+id/button"
+        android:id="@+id/textView"
+        android:layout_alignParentTop="true"
+        android:layout_x="158dp"
+        android:layout_y="158dp" />
+
+    <ListView
+        android:layout_width="471dp"
+        android:layout_height="112dp"
+        android:layout_weight="0.13"
+        android:layout_x="85dp"
+        android:layout_y="15dp" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@android:drawable/btn_dialog"
+        android:layout_x="543dp"
+        android:layout_y="-6dp"
+        android:id="@+id/closeButton" />
+</AbsoluteLayout>

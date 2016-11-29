@@ -13,6 +13,7 @@ import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 
 import java.io.*;
@@ -26,6 +27,7 @@ public class ScoreDialogBox extends Dialog implements android.view.View.OnClickL
     private int score;
     private Dialog d;
     private Button submit;
+    private EditText username;
     private ImageButton close;
 
     public ScoreDialogBox(Activity a, int userChoice, int score) {
@@ -41,6 +43,7 @@ public class ScoreDialogBox extends Dialog implements android.view.View.OnClickL
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.dialog);
         submit = (Button) findViewById(R.id.button);
+        username = (EditText) findViewById(R.id.editText);
         close = (ImageButton) findViewById(R.id.closeButton);
         submit.setOnClickListener(this);
         close.setOnClickListener(this);
@@ -53,6 +56,7 @@ public class ScoreDialogBox extends Dialog implements android.view.View.OnClickL
                 //save file
                 try {
                     fileHandler(userChoice);
+                    dismiss();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -76,8 +80,6 @@ public class ScoreDialogBox extends Dialog implements android.view.View.OnClickL
         String s;
         while((s = reader.readLine()) != null)
         {
-
-            //String s = reader.readLine();
             char[] arr = s.toCharArray();
             String name = "";
             String score ="";
@@ -99,15 +101,36 @@ public class ScoreDialogBox extends Dialog implements android.view.View.OnClickL
 
         }
 
+        //Loop through the map
         /*for (Map.Entry<String, Integer> entry : data.entrySet()) {
             System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue());
 
         }*/
 
+        boolean newHighScore = false;
         Map<Integer, String> treeMap = new TreeMap<Integer, String>(data);
-        for (Integer str : treeMap.keySet()) {
-            System.out.println(str);
+        Integer scoreFromTxt = treeMap.keySet().iterator().next();
+
+        if(Integer.valueOf(score) > scoreFromTxt)
+        {
+            treeMap.remove(scoreFromTxt);
+            treeMap.put(Integer.valueOf(score), username.getText().toString());
         }
+
+        OutputStreamWriter outputStreamWriter = new OutputStreamWriter(c.openFileOutput("/card4highscore.txt", c.MODE_PRIVATE));
+
+        String newScore;
+
+        //PrintWriter write = new PrintWriter(new FileWriter(c.getResources().openRawResource(fileReaderHelper(userChoice)));
+        for(Integer str: treeMap.keySet())
+        {
+            String tmpname =  str.toString();
+            newScore = treeMap.get(str) + ":" + tmpname;
+            outputStreamWriter.write(newScore);
+            System.out.println(newScore);
+        }
+        outputStreamWriter.flush();
+        outputStreamWriter.close();
 
     }
 

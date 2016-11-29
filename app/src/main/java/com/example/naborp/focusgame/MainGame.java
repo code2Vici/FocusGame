@@ -97,14 +97,7 @@ public class MainGame extends AppCompatActivity
                 }
 
                 //finish game
-                boolean[] tmpBool = imagePlacing.getSelectedCards();
-                boolean finishGame = true;
-                for(boolean eachCard: tmpBool) {
-                    if(!eachCard) {
-                        finishGame = false;
-                    }
-                }
-                if(finishGame) {
+                if(imagePlacing.isGameFinished()) {
                     ScoreDialogBox dialog = new ScoreDialogBox(MainGame.this, userChoice);
                     dialog.show();
                 }

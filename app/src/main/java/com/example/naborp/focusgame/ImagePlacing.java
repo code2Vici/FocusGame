@@ -135,7 +135,15 @@ public class ImagePlacing extends BaseAdapter {
 
         }
     }
+    public boolean isGameFinished(){
+        for(boolean eachCard: selectedCards) {
+            if(!eachCard) {
+                return false;
+            }
+        }
 
+        return true;
+    }
     public View getView(int position, View convertView, ViewGroup parent)
     {
         ImageView imageView;

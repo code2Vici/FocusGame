@@ -38,23 +38,24 @@ public class UserScore implements Comparable<UserScore>{
     //method: Constructor
     //Purpose: constructor that initialize empty score.
     public UserScore() {
-        stringLine = "ABC00";
+        stringLine = "ABC:00";
         initial = stringLine.substring(0, 3);
-        score = Integer.parseInt(stringLine.substring(3));
+        score = Integer.parseInt(stringLine.substring(4));
     }
 
     //method: initialization constructor
     //purpose: constructor that initialize score and initial.
     public UserScore(String stringLine) {
         this.stringLine = stringLine;
-        initial = stringLine.substring(0, 3);
-        score = Integer.parseInt(stringLine.substring(3));
+        String[] part = stringLine.split(":");
+        initial = part[0];
+        score = Integer.parseInt(part[1]);
     }
 
     public UserScore(String name, int score){
         this.initial = name;
         this.score = score;
-        this.stringLine = name + score;
+        this.stringLine = name + ":" + score;
 
     }
     //method: getter for initial

@@ -153,10 +153,6 @@ public class ScoreDialogBox extends Dialog implements android.view.View.OnClickL
             for (int i = 0; i < 3; ++i)
             {
                 s = reader.readLine();
-                char[] arr = s.toCharArray();
-                String name = "";
-                String score = "";
-                boolean b = true;
 
                 userscore.add(new UserScore(s));
 
@@ -247,32 +243,6 @@ public class ScoreDialogBox extends Dialog implements android.view.View.OnClickL
         pw.flush();
         pw.close();
 
-    }
-
-    private int fileReaderHelper(int ch) {
-
-        switch (ch) {
-            case 2:
-                return R.raw.card4highscore;
-            case 3:
-                return R.raw.card6highscore;
-            case 4:
-                return R.raw.card8highscore;
-            case 5:
-                return R.raw.card10highscore;
-            case 6:
-                return R.raw.card12highscore;
-            case 7:
-                return R.raw.card14highscore;
-            case 8:
-                return R.raw.card16highscore;
-            case 9:
-                return R.raw.card18highscore;
-            case 10:
-                return R.raw.card20highscore;
-        }
-
-        return -1;
     }
 
 }

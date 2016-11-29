@@ -1,6 +1,18 @@
 package com.example.naborp.focusgame;
 
-//UbaldoJimenez, Shun, Nabor and Eric
+/**************************************************************
+ *  File: MainMenu.java
+ *  Author: Nabor Palomera
+ *          Ubaldo Jimenez Prieto
+ *          Shun Lu
+ *          WeiYing Lee
+ *
+ * Assignment: Focus Game
+ * Date Last Modified: 11/29/2016
+ *
+ * Purpose:
+ *
+ *************************************************************/
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;

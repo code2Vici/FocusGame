@@ -1,5 +1,18 @@
 package com.example.naborp.focusgame;
-/*Main Game class where the cards are diplayed */
+
+/**************************************************************
+ *  File: MainGame.java
+ *  Author: Nabor Palomera
+ *          Ubaldo Jimenez Prieto
+ *          Shun Lu
+ *          WeiYing Lee
+ *
+ * Assignment: Focus Game
+ * Date Last Modified: 11/29/2016
+ *
+ * Purpose: Main Game class where the cards are diplayed.
+ *
+ *************************************************************/
 
 import android.content.Context;
 import android.content.Intent;

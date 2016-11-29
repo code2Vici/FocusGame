@@ -48,6 +48,7 @@ public class UserScore implements Comparable<UserScore>{
     public UserScore(String stringLine) {
         this.stringLine = stringLine;
         String[] part = stringLine.split(":");
+
         initial = part[0];
         score = Integer.parseInt(part[1]);
     }

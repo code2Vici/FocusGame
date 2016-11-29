@@ -22,8 +22,6 @@ import java.util.*;
 public class ScoreDialogBox extends Dialog implements android.view.View.OnClickListener {
 
     private HashMap<Integer, String> data;
-    private Integer[] dataScore;
-    private String[] dataName;
     private Activity c;
     private int userChoice;
     private int score;
@@ -38,7 +36,6 @@ public class ScoreDialogBox extends Dialog implements android.view.View.OnClickL
         this.userChoice = userChoice;
         this.score = score;
         data = new HashMap<Integer, String>();
-
     }
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,47 +74,30 @@ public class ScoreDialogBox extends Dialog implements android.view.View.OnClickL
 
     private void fileHandler(int userChoice) throws IOException {
 
-        String filename = "card" + (userChoice * 2) + "highscore.txt";
-        String dummyScore = "abc:0";
-        St
-
-        File file = new File(c.getFilesDir(), filename);
-        file.delete();
-        if (!file.exists()) {
-            FileOutputStream fo = c.openFileOutput(filename, c.MODE_PRIVATE);
-            PrintWriter pw = new PrintWriter(fo);
-            pw.println(dummyScore + "\n" + dummyScore + "\n" + dummyScore);
-            fo.flush();
-            pw.flush();
-            fo.close();
-            pw.close();
-        }
-//        InputStream is = c.getResources().openRawResource(fileReaderHelper(userChoice));
-//        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-        FileInputStream is = c.openFileInput(filename);
+        InputStream is = c.getResources().openRawResource(fileReaderHelper(userChoice));
         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+
         String s;
-        while ((s = reader.readLine()) != null)
+        while((s = reader.readLine()) != null)
         {
             char[] arr = s.toCharArray();
             String name = "";
-            String score = "";
+            String score ="";
             boolean b = true;
 
-            for (int j = 0; j < arr.length; ++j) {
-                if (arr[j] != ':' && b) {
-                    name += arr[j];
+            for (int i = 0; i < arr.length; ++i) {
+                if (arr[i] != ':' && b) {
+                    name += arr[i];
                 }
-                else if (arr[j] == ':') {
+                else if (arr[i] == ':') {
                     b = false;
                 }
                 else {
-                    score += arr[j];
+                    score += arr[i];
                 }
             }
 
-
-            //data.put(Integer.valueOf(score), name);
+            data.put(Integer.valueOf(score), name);
 
         }
 
@@ -131,16 +111,13 @@ public class ScoreDialogBox extends Dialog implements android.view.View.OnClickL
         Map<Integer, String> treeMap = new TreeMap<Integer, String>(data);
         Integer scoreFromTxt = treeMap.keySet().iterator().next();
 
-
         if(Integer.valueOf(score) > scoreFromTxt)
         {
             treeMap.remove(scoreFromTxt);
             treeMap.put(Integer.valueOf(score), username.getText().toString());
         }
 
-        OutputStreamWriter pw = new OutputStreamWriter(c.openFileOutput(filename, c.MODE_PRIVATE));
-        //OutputStreamWriter outputStreamWriter = new OutputStreamWriter(c.openFileOutput(c.getFilesDir(), c.MODE_PRIVATE));
-
+        OutputStreamWriter outputStreamWriter = new OutputStreamWriter(c.openFileOutput("/card4highscore.txt", c.MODE_PRIVATE));
 
         String newScore;
 
@@ -149,11 +126,11 @@ public class ScoreDialogBox extends Dialog implements android.view.View.OnClickL
         {
             String tmpname =  str.toString();
             newScore = treeMap.get(str) + ":" + tmpname;
-            pw.write(newScore);
+            outputStreamWriter.write(newScore);
             System.out.println(newScore);
         }
-        pw.flush();
-        pw.close();
+        outputStreamWriter.flush();
+        outputStreamWriter.close();
 
     }
 

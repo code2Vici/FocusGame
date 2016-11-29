@@ -125,7 +125,6 @@ public class MainGame extends AppCompatActivity
             }
         });
 
-
     }
 
     //Save Data from Current Activity
@@ -147,14 +146,12 @@ public class MainGame extends AppCompatActivity
         savedInstanceState.putIntArray("savedReference", savedReference);
         savedInstanceState.putInt("score", score);
 
-        if (appSong != null) {
-            try {
-                appSong.stop();
-                appSong.release();
-            } finally {
-                appSong = null;
-            }
+        if(appSong != null) {
+            savedInstanceState.putInt("possition", appSong.getCurrentPosition());
+            appSong.pause();
         }
+
+
     }
     //Restore Data from previous destroyed activity
     @Override
@@ -178,6 +175,12 @@ public class MainGame extends AppCompatActivity
         savedReference = savedInstanceState.getIntArray("savedReference");
         score = savedInstanceState.getInt("score");
         scoreView.setText("Score: " + score);
+
+        if (appSong != null) {
+            int pos = savedInstanceState.getInt("possition");
+            appSong.seekTo(pos);
+        }
+
     }
     //When New Game Button is clicked
     public void newGameClicked(View v) {

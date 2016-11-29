@@ -22,13 +22,15 @@ public class ScoreDialogBox extends Dialog implements android.view.View.OnClickL
 
     private HashMap<String, Integer> score;
     private Activity c;
+    private int userChoice;
     private Dialog d;
     private Button submit;
     private ImageButton close;
 
-    public ScoreDialogBox(Activity a) {
+    public ScoreDialogBox(Activity a, int userChoice) {
         super(a);
         this.c = a;
+        this.userChoice = userChoice;
         score = new HashMap<String, Integer>();
     }
 
@@ -47,7 +49,11 @@ public class ScoreDialogBox extends Dialog implements android.view.View.OnClickL
         switch(v.getId()) {
             case R.id.button:
                 //save file
-
+                try {
+                    fileHandler(userChoice);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 break;
             case R.id.closeButton:
                 dismiss();
@@ -60,29 +66,30 @@ public class ScoreDialogBox extends Dialog implements android.view.View.OnClickL
 
     }
 
-//    private void fileHandler(int userchoice, ) {
-//        File f = new File("src/cs245/scores.txt");
-//        if (!f.exists())
-//        {
-//            PrintWriter pw = new PrintWriter(new FileWriter("src/cs245/scores.txt"));
-//            for (int i = 0; i < scores.size(); ++i) {
-//                pw.println(scores.get(i));
-//            }
-//
-//            pw.flush();
-//            pw.close();
-//        }
-//
-//        BufferedReader reader = new BufferedReader(new FileReader("src/cs245/scores.txt"));
-//
-//        String line = reader.readLine();
-//        scores.add(0, new UserScore(line));
-//        scores.remove(scores.size() - 1);
-//
-//        for (int i = 1; i < 5; ++i) {
-//            line = reader.readLine();
-//            scores.add(i, new UserScore(line));
-//            scores.remove(scores.size() - 1);
-//        }
-//    }
+    private void fileHandler(int userChoice) throws IOException {
+        String filename = "R.raw." + (userChoice * 2) + "cardHighScore";
+        File f = new File(filename);
+        if (!f.exists())
+        {
+            PrintWriter pw = new PrintWriter(new FileWriter(filename));
+            //for (int i = 0; i < scores.size(); ++i) {
+            //    pw.println(scores.get(i));
+            //}
+
+            pw.flush();
+            pw.close();
+        }
+
+        BufferedReader reader = new BufferedReader(new FileReader(filename));
+
+        String line = reader.readLine();
+        //scores.add(0, new UserScore(line));
+        //scores.remove(scores.size() - 1);
+
+        for (int i = 1; i < 5; ++i) {
+            line = reader.readLine();
+         //   scores.add(i, new UserScore(line));
+         //   scores.remove(scores.size() - 1);
+        }
+    }
 }

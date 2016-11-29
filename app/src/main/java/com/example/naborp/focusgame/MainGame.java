@@ -105,7 +105,7 @@ public class MainGame extends AppCompatActivity
                     }
                 }
                 if(finishGame) {
-                    ScoreDialogBox dialog = new ScoreDialogBox(MainGame.this);
+                    ScoreDialogBox dialog = new ScoreDialogBox(MainGame.this, userChoice);
                     dialog.show();
                 }
 

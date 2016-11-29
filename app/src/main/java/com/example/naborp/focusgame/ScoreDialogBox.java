@@ -106,8 +106,12 @@ public class ScoreDialogBox extends Dialog implements android.view.View.OnClickL
 
         Map<Integer, String> treeMap = new TreeMap<Integer, String>(data);
         for (Integer str : treeMap.keySet()) {
-            System.out.println(str);
+
+            if()
         }
+
+
+
 
     }
 

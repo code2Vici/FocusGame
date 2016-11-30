@@ -1,8 +1,20 @@
 package com.example.naborp.focusgame;
 
-/**
- * Created by Eric on 11/28/2016..
- */
+/**************************************************************
+ *  File: ScoreDialogBox.java
+ *  Author: Nabor Palomera
+ *          Ubaldo Jimenez Prieto
+ *          Shun Lu
+ *          WeiYing Lee
+ *
+ * Assignment: Focus Game
+ * Date Last Modified: 11/29/2016
+ *
+ * Purpose: ScoreDialogBox is to prompt the user to enter their high score
+ * when the game is finished. A dialog box pops up displaying the top three
+ * scores and the user score at that current moment. In addition, we asked the
+ * user to enter their username after every completed game.
+ *************************************************************/
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -16,7 +28,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
-
 import org.w3c.dom.Text;
 
 import java.io.*;
@@ -24,7 +35,9 @@ import java.util.*;
 
 public class ScoreDialogBox extends Dialog implements android.view.View.OnClickListener {
 
-    private HashMap<Integer, String> data;
+    //Instance Variables
+
+    //private HashMap<Integer, String> data;
     //private Integer[] dataScore;
     //private String[] dataName;
     private ArrayList<UserScore> userscore;
@@ -40,6 +53,9 @@ public class ScoreDialogBox extends Dialog implements android.view.View.OnClickL
     private EditText username;
     private ImageButton close;
 
+    //method: Constructor
+    //purpose: Set our activity, user choice and score into our
+    //instance variables of this class.
     public ScoreDialogBox(Activity a, int userChoice, int score) {
         super(a);
         this.c = a;
@@ -51,6 +67,11 @@ public class ScoreDialogBox extends Dialog implements android.view.View.OnClickL
         //dataName = new String[3];
     }
 
+    //method: OnCreate
+    //purpose: constructor for this activity for Dialog Box
+    //Set all our initial labels, buttons, and textview at the start of the pop up.
+    // In addition, before displaying the highscore, we read our saved data scores in order
+    //to display it to the user.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -87,18 +108,15 @@ public class ScoreDialogBox extends Dialog implements android.view.View.OnClickL
 
         }catch(IOException e){}
 
-        //submit.setEnabled(true);
-
-        if(username.length() < 3) {
-            //submit.setEnabled(false);
-        }
-
         scoreShow.setText("Score: " + score);
 
         submit.setOnClickListener(this);
         close.setOnClickListener(this);
     }
 
+    //method: onClick
+    //purpose: Set all our event click handlers here.
+    //For our case is two buttons: Submit and Close.
     public void onClick(View v) {
         //handle logic
         switch(v.getId()) {
@@ -124,6 +142,8 @@ public class ScoreDialogBox extends Dialog implements android.view.View.OnClickL
 
     }
 
+    //method: fileHandler
+    //purpose:
     private void fileHandler(int userChoice) throws IOException {
 
         String filename = "card" + (userChoice * 2) + "highscore.txt";
@@ -145,8 +165,7 @@ public class ScoreDialogBox extends Dialog implements android.view.View.OnClickL
             fo.close();
             pw.close();
         }else{
-            //        InputStream is = c.getResources().openRawResource(fileReaderHelper(userChoice));
-//        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+
             FileInputStream is = c.openFileInput(filename);
             BufferedReader reader = new BufferedReader(new InputStreamReader(is));
             String s;
@@ -155,70 +174,16 @@ public class ScoreDialogBox extends Dialog implements android.view.View.OnClickL
                 s = reader.readLine();
 
                 userscore.add(new UserScore(s));
-
-//            for (int j = 0; j < arr.length; ++j) {
-//                if (arr[j] != ':' && b) {
-//                    name += arr[j];
-//                }
-//                else if (arr[j] == ':') {
-//                    b = false;
-//                }
-//                else {
-//                    score += arr[j];
-//                }
-//            }
-
-
-                //data.put(Integer.valueOf(score), name);
-                ;
-                //dataScore[i] = Integer.valueOf(score);
-                //dataName[i] = name;
             }
         }
-
-
-        //Loop through the map
-        /*for (Map.Entry<String, Integer> entry : data.entrySet()) {
-            System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue());
-
-        }*/
 
         boolean newHighScore = false;
-        //Map<Integer, String> treeMap = new TreeMap<Integer, String>(data);
-        //Integer scoreFromTxt = treeMap.keySet().iterator().next();
-
-        /*
-        for (int i = 0; i < 2; ++i) {
-            if (dataScore[i] > dataScore[i + 1]) {
-                Integer tempScore = dataScore[i];
-                String tempName = dataName[i];
-                dataScore[i] = dataScore[i + 1];
-                dataName[i] = dataName[i + 1];
-                dataScore[i + 1] = tempScore;
-                dataName[i + 1] = tempName;
-            }
-        }
-        */
 
         Collections.sort(userscore);
 
         if(Integer.valueOf(score) >= userscore.get(0).getScore())
         {
-            /*
-            for (int i = 1; i < 3; i++) {
-                if (Integer.valueOf(score) <= dataScore[i]) {
-                    dataScore[i - 1] = Integer.valueOf(score);
-                    dataName[i - 1] = username.getText().toString();
-                }
-                else if (i == 2) {
-                    dataScore[i] = Integer.valueOf(score);
-                    dataName[i] = username.getText().toString();
-                }
-                else;
-                */
-                userscore.add(new UserScore(username.getText().toString(), score));
-            //}
-            //treeMap.put(Integer.valueOf(score), username.getText().toString());
+            userscore.add(new UserScore(username.getText().toString(), score));
         }
 
         Collections.sort(userscore);
@@ -226,16 +191,11 @@ public class ScoreDialogBox extends Dialog implements android.view.View.OnClickL
         userscore.remove(userscore.get(0));
 
         PrintWriter pw = new PrintWriter(c.openFileOutput(filename, c.MODE_PRIVATE));
-        //OutputStreamWriter outputStreamWriter = new OutputStreamWriter(c.openFileOutput(c.getFilesDir(), c.MODE_PRIVATE));
-
 
         String newScore;
 
-        //PrintWriter write = new PrintWriter(new FileWriter(c.getResources().openRawResource(fileReaderHelper(userChoice)));
         for(int i = 0; i < 3; ++i)
         {
-//            String tmpname =  dataName[i];
-//            String tmpscore = dataScore[i].toString();
             newScore = userscore.get(i).getStringLine();
             pw.println(userscore.get(i).getStringLine());
             System.out.println(newScore);
@@ -244,7 +204,6 @@ public class ScoreDialogBox extends Dialog implements android.view.View.OnClickL
         pw.close();
 
     }
-
 }
 
 

@@ -143,7 +143,9 @@ public class ScoreDialogBox extends Dialog implements android.view.View.OnClickL
     }
 
     //method: fileHandler
-    //purpose:
+    //purpose: If the user clicks on submit, If the user score is higher than the top three
+    //we save it to the corresponding file according to type(numberOFVards). If it is not higher
+    //than the top three scores, then we simply ignore it.
     private void fileHandler(int userChoice) throws IOException {
 
         String filename = "card" + (userChoice * 2) + "highscore.txt";
@@ -184,11 +186,10 @@ public class ScoreDialogBox extends Dialog implements android.view.View.OnClickL
         if(Integer.valueOf(score) >= userscore.get(0).getScore())
         {
             userscore.add(new UserScore(username.getText().toString(), score));
+            userscore.remove(userscore.get(0));
         }
 
         Collections.sort(userscore);
-
-        userscore.remove(userscore.get(0));
 
         PrintWriter pw = new PrintWriter(c.openFileOutput(filename, c.MODE_PRIVATE));
 

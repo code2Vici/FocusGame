@@ -166,7 +166,7 @@ public class ImagePlacing extends BaseAdapter {
         //Display background card if false
         if (!selectedCards[position])
         {
-            imageView.setImageResource(R.drawable.animal_10);
+            imageView.setImageResource(R.drawable.back_card);
         }
         else {
             imageView.setImageResource(userCardsIds[position]);

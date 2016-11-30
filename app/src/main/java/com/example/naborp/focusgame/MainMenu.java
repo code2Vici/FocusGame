@@ -10,7 +10,11 @@ package com.example.naborp.focusgame;
  * Assignment: Focus Game
  * Date Last Modified: 11/29/2016
  *
- * Purpose:
+ * Purpose: This class' purpose is to get the number of cards to
+ * display on the game depending on what the user selects. For
+ * instance, if the user selects 4 cards, only 4 cards will be
+ * displayed to play with. If he/she selects 20, the maximum
+ * allowed cards to choose, all 20 will display.
  *
  *************************************************************/
 
@@ -24,6 +28,8 @@ import android.widget.Spinner;
 
 public class MainMenu extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
+    //method: onCreate(Activity Constructor)
+    //purpose: Its purpose is to initialize activities' variables and display when activity is loaded
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -41,7 +47,14 @@ public class MainMenu extends AppCompatActivity implements AdapterView.OnItemSel
         cardChoice.setOnItemSelectedListener(this);
     }
 
-    //When user selects an option from dropdown menu
+    //method: onItemSelected
+    /*purpose: When user selects an option from dropdown menu this method acts
+               as an onSelectedListener so that when you select x number of cards
+               it goes to the correct activity with the correct number of cards
+               depending on the choice. To do this we implemented a simple switch
+               case to get the user choice and depending on the choice we start
+               a new intent with the choice selected.
+     */
     public void onItemSelected(AdapterView<?> parent, View v, int position, long id)
     {
         MainGame startGame;

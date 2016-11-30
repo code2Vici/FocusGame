@@ -10,7 +10,16 @@ package com.example.naborp.focusgame;
  * Assignment: Focus Game
  * Date Last Modified: 11/29/2016
  *
- * Purpose: Main Game class where the cards are diplayed.
+ * Purpose: Its purpose is to display the correct number of cards depending
+ * on the user choice on the previous activity. This class also
+ * handles the new game button, try again button, end game button, and
+ * ON/OFF toggle button. The main purpose of this class is to do the
+ * comparison between each card and if two cards match when selected, do
+ * nothing just accumulate the points. If two selected cards do not match
+ * then we use the try again button to flip cards and try to match again.
+ * The new game button takes you to the main menu where the user can
+ * reselect the number of cards. The end game displays the whole cards
+ * face up. The toggle button let's the user play/stop the music.
  *
  *************************************************************/
 
@@ -48,6 +57,8 @@ public class MainGame extends AppCompatActivity
     //User should not modify this object
     private ImagePlacing imagePlacing;
 
+    //method: onCreate(Activity Constructor)
+    //purpose: Its purpose is to initialize activities' variables and display when activity is loaded
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -65,8 +76,6 @@ public class MainGame extends AppCompatActivity
         //Get score view
         scoreView = (TextView) findViewById(R.id.score);
         scoreView.setText("Score: " + score);
-
-        //Problem call
 
         cardTable.setAdapter(imagePlacing = new ImagePlacing(this, userChoice));
         cardTable.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -140,7 +149,8 @@ public class MainGame extends AppCompatActivity
 
     }
 
-    //Save Data from Current Activity
+    //method: onSaveInstanceState
+    //purpose: To Save Data from Current Activity so it is not lost when rotating
     public void onSaveInstanceState(Bundle savedInstanceState)
     {
         super.onSaveInstanceState(savedInstanceState);
@@ -166,7 +176,8 @@ public class MainGame extends AppCompatActivity
 
 
     }
-    //Restore Data from previous destroyed activity
+    //method: onRestoreInstanceState
+    //purpose: To Restore Data from previous destroyed activity and keep the same functionalities
     @Override
     public void onRestoreInstanceState(Bundle savedInstanceState)
     {
@@ -195,7 +206,10 @@ public class MainGame extends AppCompatActivity
         }
 
     }
-    //When New Game Button is clicked
+
+    //method: newGameClicked
+    //purpose: Acts as the onClicked listener. This methods goes to the MainMenu
+    //         Activity when newGame button is clicked
     public void newGameClicked(View v) {
 
         Intent intent = new Intent(getApplicationContext(),MainMenu.class);
@@ -211,14 +225,17 @@ public class MainGame extends AppCompatActivity
         }
     }
 
-    ////When End Game Button is clicked
+    //method: endGame
+    //purpose: When End Game Button is clicked this method displays all the cards face up
     public void endGameClicked(View v) {
         ImagePlacing imageAdapter = (ImagePlacing) cardTable.getAdapter();
         imageAdapter.showAll();
         cardTable.setAdapter(imageAdapter);
     }
 
-    //When Try Again Button is clicked
+    //method: tryAgainClicked
+    //purpose: When Try Again Button is clicked if two cards do not match this buttons
+    //         flips both cards to give it a second try
     public void tryAgainClicked(View v) {
         ImagePlacing imageAdapter = (ImagePlacing) cardTable.getAdapter();
         if (savedReference[0] != -1 && savedReference[1] != -1) {

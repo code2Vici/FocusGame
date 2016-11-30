@@ -35,7 +35,7 @@ public class UserScore implements Comparable<UserScore>{
     }
 
     //method: initialization constructor
-    //purpose: constructor that initialize score and initial.
+    //purpose: constructor that initialize stringline
     public UserScore(String stringLine) {
         this.stringLine = stringLine;
         String[] part = stringLine.split(":");
@@ -44,6 +44,8 @@ public class UserScore implements Comparable<UserScore>{
         score = Integer.parseInt(part[1]);
     }
 
+    //method: initialization second constructor
+    //purpose: constructor that initializes name and score.
     public UserScore(String name, int score){
         this.initial = name;
         this.score = score;

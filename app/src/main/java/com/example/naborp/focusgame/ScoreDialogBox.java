@@ -102,9 +102,9 @@ public class ScoreDialogBox extends Dialog implements android.view.View.OnClickL
             FileInputStream is = c.openFileInput(filename);
             BufferedReader reader = new BufferedReader(new InputStreamReader(is));
 
-            score1.setText(reader.readLine());
-            score2.setText(reader.readLine());
             score3.setText(reader.readLine());
+            score2.setText(reader.readLine());
+            score1.setText(reader.readLine());
 
         }catch(IOException e){}
 
